@@ -1,0 +1,23 @@
+﻿body {
+    font-family: 'Noto Sans Arabic', sans-serif;
+    background-color: #fcfcfc;
+}
+
+.hero-gradient {
+    background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%);
+}
+
+.sticky-footer {
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.05);
+}
+
+.time-slot:hover {
+    border-color: #c4a062;
+    color: #c4a062;
+}
+
+.active-slot {
+    background-color: #c4a062 !important;
+    color: white !important;
+    border-color: #c4a062 !important;
+}

@@ -1,0 +1,103 @@
+﻿@model List<Restaurant>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="https://s3.ticketmx.com/bujairi/images/favicon.ico" type="image/x-icon">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>المطاعم - Bujairi Terrace</title>
+
+    <link rel="stylesheet" href="https://s3.ticketmx.com/css/ar/bootstrap-mod.min.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/css/ar/general.min.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/css/ar/style.min.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/bujairi/css/ar/bujairi-style.min.css">
+</head>
+<body>
+
+    <div id="wrap">
+
+        <!-- NAV -->
+        <nav class="navbar navbar-expand-lg bg-primary flex-wrap nav__bujairi">
+            <div class="d-flex align-items-center justify-content-center w-100 py-3 top__nav">
+                <a class="navbar-brand" href="/ar">
+                    <img src="https://s3.ticketmx.com/bujairi/images/bujairi-ar.svg"
+                         alt="Bujairi Logo"
+                         class="logo" />
+                </a>
+            </div>
+            <hr class="hr" />
+        </nav>
+
+        <!-- HEADER -->
+        <div class="header" dir="rtl">
+            <div class="banner-slider">
+                <div class="slide">
+                    <img src="https://s3.ticketmx.com/uploads/images/987e8ebff86625a6eb1880e853d69bc6684e07a0.jpg"
+                         class="img-fluid w-100" />
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION -->
+        <section class="section upcoming">
+            <div class="container-wide">
+                <div class="main-title d-flex mb-3">
+                    <h2 class="title flex-grow-1">مطاعم البجيري</h2>
+                </div>
+
+                <div class="row">
+
+                    <!-- 🔥 المطاعم من الداتا بيس -->
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-xl-4 col-lg-6 col-md-6">
+                            <a class="d-block card__restaurant"
+                               asp-controller="Restaurants"
+                               asp-action="Details"
+                               asp-route-id="@item.Id">
+
+                                <div class="bg">
+                                    <img src="@item.ImageUrl"
+                                         class="img-fluid"
+                                         alt="@item.Name">
+                                </div>
+
+                                <div class="logo__data d-flex align-items-end">
+                                    <div class="logo">
+                                        <img src="@item.LogoUrl" alt="">
+                                    </div>
+
+                                    <div class="data d-flex flex-column align-items-start">
+                                        <div class="type__title">
+                                            <div class="title">@item.Name</div>
+                                            <div class="type">@item.Type</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div>
+                    }
+
+                   
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://s3.ticketmx.com/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://s3.ticketmx.com/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+

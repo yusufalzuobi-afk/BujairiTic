@@ -1,0 +1,102 @@
+﻿@model BujairiTic.Models.Order
+@{
+    Layout = null;
+    var restaurantId = Model.Items.FirstOrDefault()?.RestaurantId;
+}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تأكيد الطلب</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/success.css" asp-append-version="true" />
+</head>
+<body>
+
+<div class="wrapper">
+
+    <div class="header">
+        تأكيد الطلب
+    </div>
+
+    <div class="content">
+
+        <div class="code-box" id="codeBox">
+            @(string.IsNullOrEmpty(Model.TransactionNo) ? "--" : Model.TransactionNo)
+        </div>
+
+        <div class="timer">
+            ينتهي خلال: <span id="time">03:00</span>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="instructions">
+            تم إرسال رمز التحقق.<br>
+            يرجى فتح تطبيق <strong>نفاذ</strong><br>
+            والموافقة على الطلب لإكمال العملية.
+        </div>
+
+    </div>
+
+    <div class="actions" id="actionArea">
+
+        <button onclick="cancel()">إلغاء</button>
+
+        @if (!string.IsNullOrEmpty(Model.TransactionNo))
+        {
+            <a href="/Restaurants/Details/@restaurantId"
+               class="primary-btn">
+                تم التأكيد
+            </a>
+        }
+        else
+        {
+            <button class="primary-btn"
+                    style="opacity:0.5; cursor:not-allowed;"
+                    disabled>
+                بانتظار إدخال الكود
+            </button>
+        }
+
+    </div>
+
+</div>
+
+<script>
+    const orderId = @Model.Id;
+
+    setInterval(function () {
+        fetch('/Booking/GetTransactionCode?orderId=' + orderId)
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.transactionNo && data.transactionNo !== "") {
+
+                    // تحديث الكود
+                    document.getElementById("codeBox").innerText = data.transactionNo;
+
+                    // تفعيل زر التأكيد
+                    document.getElementById("actionArea").innerHTML =
+                        `<button onclick="cancel()">إلغاء</button>
+                         <a href="/Restaurants/Details/@restaurantId"
+                            class="primary-btn">
+                            تم التأكيد
+                         </a>`;
+                }
+
+            });
+    }, 2000); // كل ثانيتين
+
+    function cancel() {
+        window.history.back();
+    }
+</script>
+
+<script src="~/js/success.js" asp-append-version="true"></script>
+
+</body>
+</html>

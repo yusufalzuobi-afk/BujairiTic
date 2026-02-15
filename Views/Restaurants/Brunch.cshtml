@@ -1,0 +1,198 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنش آند كيك - مطل البجيري</title>
+
+    <link rel="stylesheet" href="https://s3.ticketmx.com/fonts/NeoSansArabic/NeoSansArabic.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="~/css/brunch.css" asp-append-version="true" />
+</head>
+
+<body class="text-gray-800 bg-white">
+
+    <!-- Navigation -->
+    <nav class="bg-white navbar-shadow sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+            <div class="hidden md:flex gap-6 text-sm font-medium">
+                <a href="#" class="hover:text-amber-700">اتصل بنا</a>
+                <a href="#" class="text-gray-400">English</a>
+            </div>
+
+            <img src="https://s3.ticketmx.com/bujairi/images/bujairi-ar.svg" class="h-12">
+
+            <div class="hidden md:flex gap-4 text-sm font-medium">
+                <a href="#" class="hover:text-amber-700">الرئيسية</a>
+                <a href="#" class="hover:text-amber-700 border-b-2 border-amber-700">المطاعم</a>
+                <a href="#" class="hover:text-amber-700">حجوزاتي</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Full Width -->
+    <header class="relative h-[500px] w-full overflow-hidden">
+        <img src="https://s3.ticketmx.com/uploads/images/dc3da05925e3b013dd31db803aee61002b84c3a5.jpg?w=1920&h=700&mode=crop"
+             class="w-full h-full object-cover">
+
+        <div class="absolute bottom-0 right-0 left-0 bg-gradient-to-t from-black/70 to-transparent p-10">
+            <div class="max-w-7xl mx-auto flex items-end gap-6">
+                <div class="bg-white p-2 rounded-xl shadow-md hidden md:block">
+                    <img src="https://s3.ticketmx.com/uploads/images/57bde77de2eab09de36472cb45af748ebd0f883a.jpeg?w=150"
+                         class="w-28 h-28 rounded object-cover">
+                </div>
+                <div class="text-white">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-2">برنش آند كيك</h1>
+                    <span class="bg-amber-600 px-3 py-1 rounded-full text-sm">عالمي</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Grey Section -->
+    <section class="bg-gray-100 py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-10">
+
+                <!-- Content -->
+                <div class="lg:w-3/5 space-y-6">
+
+                    <section class="bg-white p-8 rounded-2xl shadow-sm">
+                        <h2 class="text-xl font-bold mb-4 bujairi-gold">عن المطعم</h2>
+                        <p class="text-gray-600 leading-relaxed">
+                            من قلب إسبانيا، ومن برشلونة تحديدًا، يرحب برنش آند كيك بضيوفه بحفاوية بالغة.
+                            يعتمد برنش آند كيك على المكونات العضوية وجودة النكهات المختلفة وبكميات سخية للمشاركة.
+                        </p>
+                    </section>
+
+                    <section class="bg-white p-8 rounded-2xl shadow-sm">
+                        <h2 class="text-xl font-bold mb-4 bujairi-gold">الشروط والأحكام</h2>
+                        <ul class="space-y-3 text-sm text-gray-600 list-disc list-inside">
+                            <li>يلتزم الضيف بالحجز والوصول في الوقت المحدد.</li>
+                            <li>جميع الحجوزات صالحة للتاريخ المحدد فقط.</li>
+                            <li>استرداد رسوم الحجز من مبلغ الفاتورة.</li>
+                            <li>تخضع جميع الحجوزات لتوفر المطعم.</li>
+                            <li>الإلغاء قبل 24 ساعة على الأقل.</li>
+                        </ul>
+                    </section>
+
+                    <section class="bg-white p-6 rounded-2xl shadow-sm overflow-hidden h-[300px]">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3623.708383732955!2d46.574309199999995!3d24.7368899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe6a9b7f454b6510f!2sBujairi%20Terrace!5e0!3m2!1sen!2ssa!4v1662991281447!5m2!1sen!2ssa"
+                                width="100%" height="100%" style="border:0;" allowfullscreen></iframe>
+                    </section>
+
+                </div>
+
+                <!-- Booking Card -->
+                <div class="lg:w-2/5">
+                    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+
+                        <div class="bg-gray-50 p-6 border-b">
+                            <h3 class="text-xl font-bold">تفاصيل الحجز</h3>
+                            <p class="text-sm text-gray-500">احجز طاولتك الآن</p>
+                        </div>
+
+                        <div class="p-8 space-y-6">
+
+                            <form asp-controller="Booking"
+                                  asp-action="Create"
+                                  method="post"
+                                  id="bookingForm">
+
+                                <!-- مهم جداً -->
+                                <input type="hidden" name="restaurantId" value="@Model.Id" />
+
+                                <!-- التاريخ -->
+                                <div>
+                                    <label class="block text-sm font-bold mb-2">اختر التاريخ</label>
+                                    <select name="BookingDate"
+                                            id="dateSelect"
+                                            required
+                                            class="w-full p-3 border rounded-lg bg-white">
+                                    </select>
+                                </div>
+
+                                <!-- عدد الضيوف -->
+                                <div>
+                                    <label class="block text-sm font-bold mb-2">عدد الضيوف</label>
+                                    <div class="flex items-center justify-between border rounded-lg p-2">
+
+                                        <button type="button"
+                                                onclick="updateQty(1)"
+                                                class="w-10 h-10 bg-gray-100 rounded-md">
+                                            -
+                                        </button>
+
+                                        <input name="Guests"
+                                               type="number"
+                                               id="guestCount"
+                                               value="1"
+                                               min="1"
+                                               max="10"
+                                               readonly
+                                               class="text-center font-bold text-lg w-16 border-none">
+
+                                        <button type="button"
+                                                onclick="updateQty(-1)"
+                                                class="w-10 h-10 bg-gray-100 rounded-md">
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- الوقت -->
+                                <div>
+                                    <label class="block text-sm font-bold mb-2">اختر الوقت</label>
+                                    <div class="grid grid-cols-3 gap-2 max-h-60 overflow-y-auto"
+                                         id="timeSlotsContainer">
+                                    </div>
+                                </div>
+
+                                <!-- الوقت المختار -->
+                                <input type="hidden"
+                                       name="SelectedTime"
+                                       id="selectedTimeInput" />
+
+                                <!-- السعر -->
+                                <div class="bg-amber-50 p-4 rounded-lg">
+                                    <div class="flex justify-between items-center text-lg">
+                                        <span class="font-bold">الإجمالي</span>
+                                        <span class="font-bold text-amber-800" id="totalPrice">
+                                            50 ريال
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- زر الحجز -->
+                                <button type="submit"
+                                        class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-xl">
+                                    احجز الآن
+                                </button>
+
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="bg-white border-t mt-12 py-8">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+            <span>© 2026 جميع الحقوق محفوظة لشركة الدرعية</span>
+            <div class="flex items-center gap-2 ltr">
+                <img src="https://s3.ticketmx.com/bujairi/images/phone.svg" alt="phone" class="w-4">
+                <span dir="ltr">+966 92 0021 727</span>
+            </div>
+        </div>
+    </footer>
+    <script src="~/js/brunch.js" asp-append-version="true"></script>
+
+</body>
+</html>

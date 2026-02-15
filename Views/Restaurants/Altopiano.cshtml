@@ -1,0 +1,120 @@
+﻿@model BujairiTic.Models.Restaurant
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Model.Name - مطل البجيري</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="~/css/altopiano.css" asp-append-version="true" />
+</head>
+
+<body class="text-gray-800">
+
+    <!-- HERO -->
+    <section class="relative h-[450px] overflow-hidden">
+        <img src="@Model.ImageUrl" class="w-full h-full object-cover">
+        <div class="absolute inset-0 hero-gradient flex items-end">
+            <div class="max-w-7xl mx-auto w-full px-4 pb-10 text-white">
+                <h1 class="text-4xl font-bold">@Model.Name</h1>
+                <p class="opacity-80">@Model.Description</p>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 py-12 grid lg:grid-cols-3 gap-10">
+
+        <!-- LEFT CONTENT -->
+        <div class="lg:col-span-2 space-y-8">
+
+            <div class="card">
+                <h2 class="section-title">عن المطعم</h2>
+                <p>@Model.Description</p>
+            </div>
+
+            <div class="card">
+                <h2 class="section-title">الشروط والأحكام</h2>
+                <ul class="list-disc list-inside text-gray-600 space-y-2">
+                    <li>الحجز صالح للتاريخ المحدد فقط.</li>
+                    <li>الحد الأدنى للإنفاق @Model.MinimumCharge ريال.</li>
+                    <li>الإلغاء قبل 24 ساعة.</li>
+                    <li>المبالغ غير مستردة عند عدم الحضور.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- BOOKING FORM -->
+        <div>
+
+            <form asp-controller="Booking"
+                  asp-action="Create"
+                  method="post"
+                  class="booking-card">
+
+                <input type="hidden" name="restaurantId" value="@Model.Id" />
+                <input type="hidden" name="Guests" id="guestCountInput" value="2" />
+                <input type="hidden" name="SelectedTime" id="selectedTimeInput" />
+
+                <div class="booking-header">
+                    <h3>تفاصيل الحجز</h3>
+                </div>
+
+                <div class="p-6 space-y-6">
+
+                    <!-- Guests -->
+                    <div>
+                        <label>عدد الضيوف</label>
+                        <div class="guest-box">
+                            <button type="button" onclick="changeGuests(-1)">-</button>
+                            <span id="guestDisplay">1</span>
+                            <button type="button" onclick="changeGuests(1)">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Date -->
+                    <div>
+                        <label>التاريخ</label>
+                        <select id="dateSelect"
+                                name="BookingDate"
+                                class="input-select">
+                        </select>
+                    </div>
+
+                    <!-- Time -->
+                    <div>
+                        <label>الوقت المتاح</label>
+                        <div id="timeContainer"
+                             class="grid grid-cols-3 gap-2 max-h-40 overflow-y-auto">
+                        </div>
+                    </div>
+
+                    <!-- Total -->
+                    <div class="total-box">
+                        <span>الإجمالي</span>
+                        <span><span id="totalPrice">@Model.MinimumCharge</span> ريال</span>
+                    </div>
+
+                    <button type="submit"
+                            class="submit-btn">
+                        احجز الآن
+                    </button>
+
+                </div>
+            </form>
+        </div>
+
+    </main>
+
+    <script>
+        const MIN_PRICE = @Model.MinimumCharge;
+    </script>
+    <script src="~/js/altopiano.js" asp-append-version="true"></script>
+
+</body>
+</html>

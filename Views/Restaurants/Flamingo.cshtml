@@ -1,0 +1,202 @@
+﻿@model BujairiTic.Models.Restaurant
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فلامينغو روم - مطل البجيري | Flamingo Room - Bujairi Terrace</title>
+    <!-- Tailwind CSS for modern design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/flamingo.css" asp-append-version="true" />
+</head>
+
+<body class="bg-[#f4f7f9] text-gray-900">
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-24 flex flex-col justify-center">
+            <div class="flex items-center justify-between w-full mb-1">
+                <a href="#" class="text-sm font-medium text-gray-500 hover:text-amber-700">اتصل بنا</a>
+                <a href="#">
+                    <img src="https://s3.ticketmx.com/bujairi/images/bujairi-ar.svg" alt="Bujairi" class="h-10">
+                </a>
+                <a href="#" class="text-sm font-medium text-gray-500 hover:text-amber-700">English</a>
+            </div>
+            <div class="hidden md:flex justify-center gap-8 text-sm font-bold text-gray-700 mt-2">
+                <a href="#" class="hover:text-amber-600">الرئيسية</a>
+                <a href="#" class="hover:text-amber-600">خيارات الحجز</a>
+                <a href="#" class="bujairi-gold border-b-2 border-bujairi-gold pb-1">المطاعم</a>
+                <a href="#" class="hover:text-amber-600">تذاكري</a>
+                <a href="#" class="hover:text-amber-600">حسابي</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-[450px] md:h-[550px] overflow-hidden">
+        <img src="https://s3.ticketmx.com/uploads/images/6d48728583b18cb8fcd457a955d4de5ecef627e4.jpeg?w=1920&h=700&mode=crop"
+             alt="Flamingo Room Interior" class="w-full h-full object-cover">
+        <div class="absolute inset-0 hero-overlay flex items-end">
+            <div class="max-w-7xl mx-auto w-full px-4 pb-12 flex flex-col md:flex-row items-center md:items-end gap-6">
+                <!-- Profile Logo -->
+                <div class="w-32 h-32 md:w-44 md:h-44 bg-white p-1 rounded-2xl shadow-2xl relative z-10 -mb-6 md:-mb-10 overflow-hidden">
+                    <img src="https://s3.ticketmx.com/uploads/images/4e6f28ff2f9e5b6ec454f69466108ee0d11cca0f.jpeg?w=750&h=750"
+                         alt="Flamingo Room Logo" class="w-full h-full object-cover rounded-xl">
+                </div>
+                <div class="text-center md:text-right text-white md:mb-4">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-2">فلامينغو روم</h1>
+                    <div class="flex items-center justify-center md:justify-start gap-3">
+                        <span class="bg-bujairi-gold text-xs px-4 py-1.5 rounded-full font-bold uppercase tracking-widest">أوروبي</span>
+                        <span class="text-gray-200 text-sm">مطل البجيري، الدرعية</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- MAIN GRID -->
+    <main class="max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-12 gap-10">
+
+        <!-- SIDEBAR -->
+        <div class="lg:col-span-4 space-y-8">
+
+            <!-- Pricing -->
+            <div class="bg-white p-8 rounded-3xl shadow">
+                <h2 class="font-bold text-xl mb-6">الأسعار</h2>
+                <div class="flex justify-between">
+                    <span>الحد الأدنى</span>
+                    <span class="text-2xl font-bold text-amber-600">
+                        @Model.MinimumCharge ريال / للشخص
+                    </span>
+                </div>
+            </div>
+
+            <!-- Map -->
+            <div class="bg-white p-8 rounded-3xl custom-card">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold">الموقع</h2>
+                    <a href="https://www.google.com/maps/search/?api=1&query=24.737035,46.57455" target="_blank" class="text-sm bujairi-gold font-bold hover:underline">الذهاب للموقع</a>
+                </div>
+                <div class="rounded-2xl overflow-hidden h-60 bg-gray-50 border border-gray-100 relative group">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3623.708383732955!2d46.574309199999995!3d24.7368899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe6a9b7f454b6510f!2sBujairi%20Terrace!5e0!3m2!1sen!2ssa!4v1662991281447!5m2!1sen!2ssa"
+                            class="w-full h-full border-0 grayscale group-hover:grayscale-0 transition-all duration-500"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOOKING SECTION -->
+        <div class="lg:col-span-8 space-y-8">
+
+            <form asp-controller="Booking"
+                  asp-action="Create"
+                  method="post"
+                  class="bg-white p-10 rounded-3xl shadow">
+
+                <input type="hidden" name="restaurantId" value="@Model.Id" />
+                <input type="hidden" name="SelectedTime" id="selectedTimeInput" />
+
+                <h2 class="text-2xl font-bold mb-10">تفاصيل الحجز</h2>
+
+                <!-- DATE & GUESTS -->
+                <div class="grid md:grid-cols-2 gap-8 mb-10">
+
+                    <div>
+                        <label class="block font-bold mb-4">اختار التاريخ</label>
+                        <select name="BookingDate"
+                                id="dateSelector"
+                                class="w-full bg-gray-50 border rounded-2xl p-4">
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block font-bold mb-4">عدد الضيوف (2 - 10)</label>
+                        <div class="flex justify-between bg-gray-50 border rounded-2xl p-2">
+
+                            <button type="button"
+                                    onclick="changeGuests(-1)"
+                                    class="w-12 h-12 bg-white rounded-xl">
+                                -
+                            </button>
+
+                            <input type="number"
+                                   name="Guests"
+                                   id="guestInput"
+                                   value="2"
+                                   min="2"
+                                   max="10"
+                                   readonly
+                                   class="text-2xl font-bold text-center bg-transparent">
+
+                            <button type="button"
+                                    onclick="changeGuests(1)"
+                                    class="w-12 h-12 bg-white rounded-xl">
+                                +
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- TIME -->
+                <div class="mb-10">
+                    <label class="block font-bold mb-5">اختار الوقت</label>
+                    <div id="timeContainer"
+                         class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+                    </div>
+                </div>
+
+                <!-- TOTAL -->
+                <div class="flex justify-between items-center border-t pt-10">
+                    <div>
+                        <span class="text-gray-500 block">الإجمالي</span>
+                        <span class="text-4xl font-bold">
+                            <span id="totalPrice">0</span> ريال
+                        </span>
+                    </div>
+
+                    <button type="submit"
+                            class="bg-amber-600 text-white px-20 py-5 rounded-2xl font-bold hover:bg-amber-700">
+                        احجز الآن
+                    </button>
+                </div>
+
+            </form>
+
+            <!-- TERMS -->
+            <div class="bg-white p-8 rounded-3xl shadow">
+                <button id="toggleTerms"
+                        class="flex justify-between w-full font-bold text-xl">
+                    الشروط والأحكام
+                    <span id="termsIcon">▼</span>
+                </button>
+
+                <div id="termsContent" class="hidden mt-6 text-sm text-gray-500 space-y-4">
+                    <p>• يلتزم الضيف بالحجز والوصول في الوقت المحدد.</p>
+                    <p>• جميع المبالغ غير مستردة في حال عدم الحضور.</p>
+                    <p>• يجب الإلغاء قبل 24 ساعة.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t py-16">
+        <div class="max-w-7xl mx-auto px-6 text-center text-gray-500">
+            <img src="https://s3.ticketmx.com/bujairi/images/bujairi-ar.svg"
+                 class="h-12 mx-auto mb-6 opacity-70">
+            <p>Copyright 2024 DGCL. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const MIN_PRICE = @Model.MinimumCharge;
+    </script>
+    <script src="~/js/flamingo.js" asp-append-version="true"></script>
+
+</body>
+</html>

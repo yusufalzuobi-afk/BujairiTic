@@ -1,0 +1,47 @@
+﻿body {
+    font-family: 'Neo Sans Arabic', 'Roboto', sans-serif;
+    background-color: #fcfcfc;
+}
+
+.text-bujairi {
+    color: #a68b5a;
+}
+
+.bg-bujairi {
+    background-color: #a68b5a;
+}
+
+.border-bujairi {
+    border-color: #a68b5a;
+}
+
+.navbar-shadow {
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.booking-sidebar {
+    position: sticky;
+    top: 5rem;
+}
+
+.time-slot {
+    transition: all 0.2s ease;
+    border: 1px solid #e5e7eb;
+}
+
+    .time-slot:hover {
+        border-color: #a68b5a;
+        color: #a68b5a;
+    }
+
+    .time-slot.active {
+        background-color: #a68b5a;
+        color: white;
+        border-color: #a68b5a;
+    }

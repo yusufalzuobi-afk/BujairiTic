@@ -1,0 +1,88 @@
+﻿* {
+    box-sizing: border-box;
+    font-family: 'Cairo',sans-serif;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(135deg,#e7e1d8,#dcd6cc);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    width: 420px;
+    background: #f6f6f6;
+    border-radius: 28px;
+    padding: 35px 30px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+}
+
+.english-desc {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+h3 {
+    margin: 10px 0;
+    color: #333;
+}
+
+.desc {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.input-box {
+    margin-bottom: 18px;
+}
+
+.input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 16px;
+    border: none;
+    background: #ededed;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+    .input:focus {
+        background: #fff;
+        box-shadow: 0 0 0 2px #6a1b75;
+    }
+
+button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 20px;
+    background: #5a1a66;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+    button:hover {
+        background: #4b1456;
+    }
+
+.provider-message {
+    display: none;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 12px;
+    background: #f0eef2;
+    font-size: 14px;
+}

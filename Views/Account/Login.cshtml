@@ -1,0 +1,154 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - مطل البجيري</title>
+
+    <link rel="icon" href="https://s3.ticketmx.com/bujairi/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/fonts/NeoSansArabic/NeoSansArabic.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 👇 نقلنا الستايل إلى ملف خارجي -->
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+</head>
+
+<body class="text-slate-800">
+
+    <!-- Navigation -->
+    <nav class="bg-white navbar-shadow sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="hidden lg:flex gap-6 items-center text-sm">
+                <a href="#" class="font-bold hover:text-amber-700">اتصل بنا</a>
+                <a href="#" class="text-gray-400 font-sans">English</a>
+            </div>
+
+            <a href="/">
+                <img src="https://s3.ticketmx.com/bujairi/images/bujairi-ar.svg" alt="Bujairi" class="h-12">
+            </a>
+
+            <div class="flex items-center gap-4">
+                <div class="hidden lg:flex gap-6 text-sm font-bold">
+                    <a href="#" class="hover:text-amber-700">الرئيسية</a>
+                    <a href="#" class="hover:text-amber-700">خيارات الحجز</a>
+                    <a href="#" class="text-amber-700">تسجيل دخول</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header & Steps -->
+    <div class="bg-white border-b border-gray-100 py-8">
+        <div class="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-8">
+            <h1 class="text-3xl font-bold">تسجيل الدخول</h1>
+
+            <div class="flex w-full lg:w-2/3 max-w-xl">
+                <div class="step-item active">
+                    <div class="step-content">
+                        <div class="step-dot w-3 h-3 rounded-full bg-gray-300 mx-auto mb-2"></div>
+                        <span class="step-text text-xs">تسجيل دخول</span>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-content">
+                        <div class="step-dot w-3 h-3 rounded-full bg-gray-300 mx-auto mb-2"></div>
+                        <span class="step-text text-xs">اختيار التذاكر</span>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-content">
+                        <div class="step-dot w-3 h-3 rounded-full bg-gray-300 mx-auto mb-2"></div>
+                        <span class="step-text text-xs">إتمام الشراء</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Form Section -->
+    <main class="py-16 px-4">
+        <div class="max-w-md mx-auto">
+            <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+                <div class="bg-slate-900 py-6 text-center">
+                    <h2 class="text-white text-xl font-bold">تسجيل الدخول</h2>
+                </div>
+
+                <div class="p-8">
+                   <form method="post"
+      asp-controller="Account"
+      asp-action="Login"
+      class="space-y-6">
+
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="bg-red-100 text-red-700 p-3 rounded-xl text-sm text-center">
+            @ViewBag.Error
+        </div>
+    }
+
+    <div>
+        <label class="block text-sm font-bold mb-2">البريد الإلكتروني</label>
+        <input type="email"
+               name="Email"
+               required
+               class="form-input w-full p-4 rounded-2xl bg-gray-50"
+               placeholder="admin@site.com">
+    </div>
+
+    <div>
+        <label class="block text-sm font-bold mb-2">كلمة المرور</label>
+        <input type="password"
+               name="Password"
+               required
+               class="form-input w-full p-4 rounded-2xl bg-gray-50"
+               placeholder="••••••••">
+    </div>
+
+    <button type="submit"
+            class="w-full py-5 bg-bujairi text-white font-bold rounded-2xl">
+        تسجيل الدخول
+    </button>
+
+</form>
+
+
+                    <div class="mt-8 pt-8 border-t border-gray-100 text-center text-sm">
+                        <p class="text-gray-500">
+                            ليس لديك حساب؟
+                            <a href="log.up.html" class="text-amber-600 font-bold mr-2 hover:underline">تسجيل حساب جديد</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center text-xs text-gray-400">
+                هذا الموقع محمي بواسطة reCAPTCHA وتطبق
+                <a href="#" class="underline">سياسة الخصوصية</a> و
+                <a href="#" class="underline">شروط الخدمة</a> الخاصة بجوجل.
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-gray-100 py-8 mt-auto">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <span class="text-sm text-gray-500">Copyright 2024 DGCL. All Rights Reserved</span>
+            <div class="flex items-center gap-2 text-slate-800 font-bold">
+                <img src="https://s3.ticketmx.com/bujairi/images/phone.svg" alt="phone" class="w-5">
+                <span dir="ltr">+966 92 0021 727</span>
+            </div>
+        </div>
+    </footer>
+
+   
+    <script src="~/js/login.js" asp-append-version="true"></script> 
+
+</body>
+</html>

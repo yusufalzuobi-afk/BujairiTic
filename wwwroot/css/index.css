@@ -1,0 +1,12 @@
+﻿body {
+    font-family: 'Neo Sans Arabic', 'Roboto', sans-serif;
+}
+
+.grid-item img {
+    border-radius: 15px;
+    transition: 0.3s ease;
+}
+
+    .grid-item img:hover {
+        transform: scale(1.03);
+    }

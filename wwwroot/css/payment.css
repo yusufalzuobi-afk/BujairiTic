@@ -1,0 +1,133 @@
+﻿* {
+    box-sizing: border-box;
+    font-family: 'Cairo',sans-serif;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg,#e7e1d8,#dcd6cc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    width: 430px;
+    background: #f6f6f6;
+    border-radius: 28px;
+    padding: 35px 30px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+    position: relative;
+}
+
+    .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 6px;
+        border-radius: 28px 28px 0 0;
+        background: linear-gradient(to left,#6a1b75,#b993d6);
+    }
+
+h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #5a1a66;
+    font-weight: 700;
+}
+
+.logos {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+    .logos img {
+        height: 32px;
+    }
+
+.input-box {
+    margin-bottom: 18px;
+}
+
+.label {
+    background: #e9e6e1;
+    padding: 12px;
+    border-radius: 14px;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.input {
+    width: 100%;
+    background: #ededed;
+    border: none;
+    padding: 16px;
+    border-radius: 16px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+    .input:focus {
+        background: #fff;
+        box-shadow: 0 0 0 2px #6a1b75;
+    }
+
+.row {
+    display: flex;
+    gap: 15px;
+}
+
+    .row .input-box {
+        flex: 1;
+    }
+
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 18px;
+    border: none;
+    border-radius: 20px;
+    background: #5a1a66;
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 10px 25px rgba(90,26,102,0.4);
+    opacity: 0.6;
+}
+
+    button.enabled {
+        opacity: 1;
+    }
+
+    button:disabled {
+        cursor: not-allowed;
+    }
+
+.footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.ssl {
+    color: #2e7d32;
+}
+
+.valid {
+    box-shadow: 0 0 0 2px #2e7d32 !important;
+    background: #fff;
+}
+
+.invalid {
+    box-shadow: 0 0 0 2px red !important;
+}

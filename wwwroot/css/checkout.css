@@ -1,0 +1,77 @@
+﻿body {
+    font-family: 'Neo Sans Arabic', 'Roboto', sans-serif;
+    background-color: #f8fafc;
+}
+
+.bg-bujairi {
+    background-color: #a68b5a;
+}
+
+.text-bujairi {
+    color: #a68b5a;
+}
+
+.border-bujairi {
+    border-color: #a68b5a;
+}
+
+.steps-container {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .steps-container li {
+        position: relative;
+        padding: 0 15px;
+        color: #94a3b8;
+        font-size: 0.8rem;
+    }
+
+        .steps-container li.active {
+            color: #a68b5a;
+            font-weight: bold;
+        }
+
+        .steps-container li:not(:last-child)::after {
+            content: '←';
+            position: absolute;
+            left: -5px;
+            top: 0;
+            color: #cbd5e1;
+        }
+
+.payment-card {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+    .payment-card:hover {
+        border-color: #e2e8f0;
+    }
+
+    .payment-card.selected {
+        border-color: #a68b5a;
+        background-color: #fffaf0;
+    }
+
+.timer-badge {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

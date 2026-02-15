@@ -1,0 +1,190 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كوفا للحلويات - Bujairi Terrace restaurants and access pass</title>
+
+    <meta name="description" content="Bujairi">
+    <meta property="og:title" content="كوفا للحلويات - Bujairi">
+
+    <link rel="icon" href="https://s3.ticketmx.com/bujairi/images/favicon.ico">
+
+    <!-- External CSS (لا نلمسهم) -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/fonts/NeoSansArabic/NeoSansArabic.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/css/ar/bootstrap-mod.min.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/lib/slick/slick.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/lib/slick/slick-theme.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/css/ar/general.min.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/css/ar/style.min.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/lib/alertify-js/build/css/alertify.rtl.min.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/lib/alertify-js/build/css/themes/default.rtl.min.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/lib/pinchzoomer/css/pinchzoomer.min.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/css/common/dev.min.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/bujairi/css/ar/bujairi-style.min.css?v=251126">
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="~/css/cova.css" asp-append-version="true">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-primary flex-wrap nav__bujairi">
+        <div class="d-flex align-items-center justify-content-lg-between justify-content-center w-100 py-3 top__nav">
+            <a class="nav-link d-lg-block d-none" href="/ar/ContactUs">اتصل بنا</a>
+            <a class="navbar-brand" href="/ar">
+                <img src="https://s3.ticketmx.com/bujairi/images/bujairi-ar.svg" alt="Bujairi Logo" class="logo" />
+            </a>
+            <a class="nav-link other-font languageLink d-lg-block d-none" href="/en">English</a>
+        </div>
+
+        <hr class="hr" />
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon">
+                <img src="https://s3.ticketmx.com/bujairi/images/btn-menu.svg" alt="menu" class="menu-icon">
+            </span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav justify-content-lg-center justify-content-start d-lg-flex d-block w-100">
+                <li class="nav-item"><a class="nav-link" href="https://www.bujairi.sa/ar">الرئيسية</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ar">خيارات الحجز</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ar/Restaurants/g/17/bujairi">المطاعم</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ar/Orders">تذاكري</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ar/Orders/Bookings">حجوزاتي</a></li>
+                <li class="nav-item">
+                    <a class="gtmLink nav-link" title="My Account" href="/ar/Account/Profile">حسابي</a>
+                </li>
+                <li class="nav-item">
+                    <a class="gtmLink nav-link" title="My Wallet" href="/ar/Wallet">محفظتي</a>
+                </li>
+                <li class="nav-item">
+                    <form method="post" id="logoutForm" class="navbar-center" action="/ar/Account/Logout">
+                        <button type="submit" class="nav-link btn-outline-dark btn border-0">تسجيل الخروج</button>
+                    </form>
+                </li>
+                <li class="nav-item d-lg-none d-block"><a class="nav-link" href="/ar/ContactUs">اتصل بنا</a></li>
+                <li class="nav-item d-lg-none d-block"><a class="nav-link other-font languageLink" href="/en">English</a></li>
+            </ul>
+        </div>
+        <hr class="hr" />
+    </nav>
+
+    <!-- Hidden fields -->
+    <input type="hidden" id="hiddenLang" value="ar">
+    <input type="hidden" id="hiddenRestaurantId" value="3">
+    <input type="hidden" id="hiddenRestaurantName" value="كوفا للحلويات">
+    <input type="hidden" id="hiddemMinimumCharge" value="50.00">
+    <input type="hidden" id="hiddenBaseUrl" value="/ar/Restaurants/AddToCart/3?slug=cova-pasticceria">
+
+    <!-- Restaurant Details -->
+    <div class="event-details restaurant__details">
+        <!-- Header Image -->
+        <div class="event-header bg-transparent">
+            <div class="container-wide p-0">
+                <div class="event-image restaurant__image">
+                    <picture>
+                        <source srcset="https://s3.ticketmx.com/uploads/images/c334f0cd19a6d2c6a4dcafd629b171bf52dfa477.jpeg?w=1920&h=700&mode=crop&bgcolor=black&format=jpg" media="(max-width: 767px)">
+                        <img src="https://s3.ticketmx.com/uploads/images/c334f0cd19a6d2c6a4dcafd629b171bf52dfa477.jpeg?w=1920&h=700&mode=crop&bgcolor=black&format=jpg" class="img-fluid w-100" alt="كوفا للحلويات">
+                    </picture>
+                    <div class="container-wide d-flex align-items-end">
+                        <div class="restaurant__logo">
+                            <img src="https://s3.ticketmx.com/uploads/images/12dde91a2e1d0516d29ea50b4bce8e5428a166bc.jpeg?w=750&h=750&mode=crop&bgcolor=black&format=jpg" alt="كوفا للحلويات">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Description & Prices -->
+        <div class="container-wide pb-md-5 pb-2 bg-mx">
+            <div class="grid-wrapper pt-lg-5 pb-2 row">
+
+                <!-- Event Info -->
+                <div class="col-lg-8 grid-item mb-md-4 mb-2">
+                    <div class="data-container p-3">
+                        <h5>كوفا هو واحد من أقدم محلات الحلويات في إيطاليا ووجهة دولية.</h5>
+                        <p>يشتهر بتميز منتجاته، خدمته الاستثنائية وتصاميمه الداخلية الرائعة. كوفا مؤسسة تمجد الحرفية والإبداع.</p>
+                    </div>
+                </div>
+
+                <!-- Prices Table -->
+                <div class="prices col-lg-4 mb-md-3 mb-2 grid-item restaurant-price">
+                    <div class="data-container mb-md-4 mb-2 p-3 d-none d-md-block">
+                        <h4>الأسعار</h4>
+                        <hr>
+                        <table class="table bg-transparent table-sm border-0 mb-0">
+                            <tr>
+                                <td class="border-0">الحد الأدنى</td>
+                                <td class="rtl border-0">
+                                    <div class="the-price text-right custom-price">
+                                        <p>قبل 5 مساءا: 0 ريال<br>بعد 5 مساءا: 50 ريال</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Booking Card -->
+                <div class="col-lg-8 grid-item catLitst">
+                    <div class="card cart">
+                        <div class="card-body">
+                            <h5 class="mb-0">الحجز</h5>
+                            <hr>
+                            <div class="reservation-message">
+                                <p>الحجز يشمل:</p>
+                                <ul>
+                                    <li>الدخول لمنطقة مطل البجيري التي تعدّ أفضل وجهة تضم عدد من أرقى المطاعم العالمية والمحلية.</li>
+                                    <li>إمكانية الدخول لحي الطريف التاريخي، مع خيار حجز جولة بصحبة مرشد سياحي.</li>
+                                    <li>استرداد قيمة رسوم الحجز من مبلغ الفاتورة.</li>
+                                </ul>
+                            </div>
+                            <div class="card-body px-0">
+                                @* <a asp-controller="Restaurants"
+                                   asp-action="Create"
+                                   asp-route-id="2"
+                                   class="btn btn-lg btn-primary btn-block">
+                                    احجز الآن
+                                </a> *@
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location Map -->
+                <div class="col-lg-4 grid-item">
+                    <div class="data-container p-3">
+                        <h4>الموقع</h4>
+                        <a class="text-link text-primary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=24.737035473339102,46.5745508134926">الذهاب للموقع</a>
+                        <div class="google-maps mt-2">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3623.708383732955!2d46.574309199999995!3d24.7368899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe6a9b7f454b6510f!2sBujairi%20Terrace!5e0!3m2!1sen!2ssa!4v1662991281447!5m2!1sen!2ssa" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer" class="footer__bujairi py-0">
+        <div class="footer__contact d-flex justify-content-between flex-md-nowrap flex-wrap">
+            <span class="copyright">Copyright 2024 DGCL. All Rights Reserved</span>
+            <a href="tel:00966920021727" target="_blank" class="phone d-flex align-items-center mb-md-0">
+                <img src="https://s3.ticketmx.com/bujairi/images/phone.svg" alt="phone" />
+                <span style="direction:ltr">+966 92 0021 727</span>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

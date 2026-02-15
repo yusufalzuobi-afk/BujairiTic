@@ -1,0 +1,276 @@
+﻿@model BujairiTic.Models.Restaurant
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تكية - مطل البجيري | Takya - Bujairi Terrace</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#9e7922'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="~/css/takya.css" asp-append-version="true" />
+
+  
+</head>
+
+
+
+    <body class="text-secondary overflow-x-hidden">
+
+        <!-- Navigation -->
+        <nav class="bg-white border-b sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <div class="flex items-center space-x-reverse space-x-8">
+                        <img src="https://s3.ticketmx.com/bujairi/images/bujairi-ar.svg" alt="Bujairi Logo" class="h-12">
+                        <div class="hidden md:flex space-x-reverse space-x-6 text-sm font-medium">
+                            <a href="#" class="hover:text-primary transition">الرئيسية</a>
+                            <a href="#" class="text-primary border-b-2 border-primary pb-1">خيارات الحجز</a>
+                            <a href="#" class="hover:text-primary transition">المطاعم</a>
+                            <a href="#" class="hover:text-primary transition">تذاكري</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-reverse space-x-4">
+                        <a href="#" class="text-sm font-bold text-gray-500 hover:text-primary">English</a>
+                        <button class="bg-primary text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-opacity-90 transition">تسجيل الدخول</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="relative h-[400px] md:h-[600px] w-full overflow-hidden">
+            <img src="https://s3.ticketmx.com/uploads/images/3c2475d677b483d98054db4b2056199aa65d6d89.jpg?w=1920&h=700&mode=crop"
+                 alt="Takya Restaurant" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hero-gradient flex items-end">
+                <div class="max-w-7xl mx-auto w-full px-4 pb-12 flex flex-col md:flex-row items-center md:items-end space-y-4 md:space-y-0 md:space-x-reverse md:space-x-8">
+                    <div class="w-32 h-32 md:w-48 md:h-48 rounded-xl border-4 border-white overflow-hidden shadow-2xl bg-white">
+                        <img src="https://s3.ticketmx.com/uploads/images/d0439724baefb87c36ab9686e0b0c4e47a8df8ff.jpg" alt="Logo" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-white text-center md:text-right flex-grow">
+                        <h1 class="text-4xl md:text-6xl font-bold">تكية</h1>
+                        <p class="text-lg md:text-xl opacity-90 mt-2">سعودي - أكلات تقليدية بنكهات عالمية</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto px-4 py-12 lg:flex lg:space-x-reverse lg:space-x-8">
+
+            <!-- Left Column: Details -->
+            <div class="lg:w-2/3 space-y-8">
+                <!-- Description -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <h2 class="text-2xl font-bold mb-4">عن تكية</h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        ياخذك تكية في جولة من الأكلات السعودية المتنوّعة وأطباقها التقليدية المحضّرة بأرقى المكونات والنكهات العالميّة. استمتع بتجربة فريدة في قلب مطل البجيري حيث يلتقي التاريخ بالحداثة في كل طبق.
+                    </p>
+                </div>
+
+                <!-- Highlights -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <h2 class="text-2xl font-bold mb-4">الحجز يشمل</h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="bg-primary bg-opacity-10 p-2 rounded-lg ml-4 mt-1">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </span>
+                            <div>
+                                <p class="font-bold">الدخول لمنطقة مطل البجيري</p>
+                                <p class="text-gray-500 text-sm">أفضل وجهة تضم عدد من أرقى المطاعم العالمية والمحلية.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-primary bg-opacity-10 p-2 rounded-lg ml-4 mt-1">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </span>
+                            <div>
+                                <p class="font-bold">زيارة حي الطريف التاريخي</p>
+                                <p class="text-gray-500 text-sm">إمكانية الدخول للحي مع خيار حجز جولة بصحبة مرشد سياحي.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-primary bg-opacity-10 p-2 rounded-lg ml-4 mt-1">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </span>
+                            <div>
+                                <p class="font-bold">استرداد قيمة الرسوم</p>
+                                <p class="text-gray-500 text-sm">يتم خصم قيمة رسوم الحجز من مبلغ فاتورتك النهائية في المطعم.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Location & Terms -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-xl mb-4">الموقع</h3>
+                        <div class="rounded-xl overflow-hidden h-48 bg-gray-100 relative group">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3623.708383732955!2d46.574309199999995!3d24.7368899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe6a9b7f454b6510f!2sBujairi%20Terrace!5e0!3m2!1sen!2ssa!4v1662991281447!5m2!1sen!2ssa"
+                                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <a href="https://maps.google.com/?q=24.737,46.574" target="_blank" class="mt-4 block text-center text-primary font-bold hover:underline">عرض الخريطة بالكامل</a>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-xl mb-4">الأسعار</h3>
+                        <div class="flex justify-between items-center py-4 border-b">
+                            <span class="text-gray-600">الحد الأدنى للفرد</span>
+                            <span class="text-2xl font-bold text-primary">100 ريال</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-4 leading-relaxed">
+                            * الأسعار تشمل ضريبة القيمة المضافة وتخضع لسياسة الحجز الخاصة بالمطعم.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Terms -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold mb-4">الشروط والأحكام</h3>
+                    <div class="text-gray-600 text-sm space-y-2 h-40 overflow-y-auto pr-4">
+                        <p>• يلتزم الضيف بالحجز والوصول في الوقت المحدد.</p>
+                        <p>• الحجوزات تسمح بالدخول مرة واحدة وصالحة للتاريخ المحدد فقط.</p>
+                        <p>• لا يمكن حجز المجموعات التي تزيد عن 8 أشخاص إلا بالاتصال المباشر.</p>
+                        <p>• إلغاء الحجز أو التعديل متاح قبل 24 ساعة من الموعد.</p>
+                        <p>• المبالغ المدفوعة غير مستردة في حال عدم الحضور.</p>
+                    </div>
+                </div>
+            </div>
+
+        <!-- RIGHT BOOKING CARD -->
+        <div class="lg:w-1/3 mt-8 lg:mt-0">
+
+            <form asp-controller="Booking"
+                  asp-action="Create"
+                  method="post"
+                  id="bookingForm">
+
+                  class="sticky-booking bg-white rounded-2xl shadow-xl border border-primary border-opacity-20 overflow-hidden">
+
+                <!-- Header -->
+                <div class="bg-primary bg-opacity-5 p-6 border-b border-gray-100">
+                    <h3 class="text-xl font-bold text-center">حجز طاولة</h3>
+                </div>
+
+                <div class="p-6 space-y-6">
+
+                    <!-- 🔥 Hidden Inputs -->
+                    <input type="hidden" name="restaurantId" value="@Model.Id" />
+                    <input type="hidden" name="Guests" id="guestCountInput" value="2" />
+                    <input type="hidden" name="SelectedTime" id="selectedTimeInput" />
+
+                    <!-- Date Picker -->
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">
+                            تاريخ الحجز
+                        </label>
+
+                        <select id="dateSelect"
+                                name="BookingDate"
+                                class="w-full border rounded-xl px-4 py-3 bg-white focus:ring-2 focus:ring-primary outline-none appearance-none cursor-pointer">
+                        </select>
+                    </div>
+
+                    <!-- Guests -->
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">
+                            عدد الضيوف
+                        </label>
+
+                        <div class="flex items-center justify-between border rounded-xl px-4 py-2">
+
+                            <button type="button"
+                                    onclick="incrementGuest()"
+                                    class="w-10 h-10 rounded-full bg-primary bg-opacity-10 text-primary font-bold text-xl flex items-center justify-center hover:bg-primary hover:text-white transition">
+                                +
+                            </button>
+
+                            <span id="guestDisplay"
+                                  class="text-center font-bold text-xl w-12">
+                                2
+                            </span>
+
+                            <button type="button"
+                                    onclick="decrementGuest()"
+                                    class="w-10 h-10 rounded-full bg-gray-100 text-gray-400 font-bold text-xl flex items-center justify-center hover:bg-gray-200 transition">
+                                -
+                            </button>
+
+                        </div>
+
+                        <p class="text-xs text-gray-400 mt-2 text-center">
+                            الحد الأدنى 2 - الحد الأقصى 10 ضيوف
+                        </p>
+                    </div>
+
+                    <!-- Time Slots -->
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">
+                            الأوقات المتاحة
+                        </label>
+
+                        <div class="grid grid-cols-3 gap-2"
+                             id="timeSlotsContainer">
+                        </div>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="bg-gray-50 p-4 rounded-xl space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">رسوم الفرد الواحد</span>
+                            <span>100 ريال</span>
+                        </div>
+
+                        <div class="flex justify-between font-bold text-lg pt-2 border-t">
+                            <span>الإجمالي</span>
+                            <span class="text-primary">
+                                <span id="totalPrice">200</span> ريال
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit"
+                            class="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
+                        احجز الآن
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-white py-12 mt-20 text-center">
+        <img src="https://s3.ticketmx.com/bujairi/images/bujairi-ar.svg"
+             class="h-10 brightness-0 invert mx-auto mb-4">
+        <p class="text-gray-400 text-sm">جميع الحقوق محفوظة © شركة الدرعية</p>
+    </footer>
+
+    <script>
+        const MIN_PRICE = @Model.MinimumCharge;
+    </script>
+    <script src="~/js/takya.js" asp-append-version="true"></script>
+
+</body>
+</html>

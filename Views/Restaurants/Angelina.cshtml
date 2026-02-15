@@ -1,0 +1,198 @@
+﻿@model BujairiTic.Models.Restaurant
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Model.Name - مطل البجيري</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="~/css/angelina.css" asp-append-version="true" />
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- NAV -->
+    <nav class="bg-white border-b sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-8 space-x-reverse">
+                    <img src="https://s3.ticketmx.com/bujairi/images/bujairi-ar.svg" class="h-10">
+                    <div class="hidden md:flex space-x-6 space-x-reverse text-sm font-medium">
+                        <a href="/" class="hover:text-[#c5a059]">الرئيسية</a>
+                        <a href="/Restaurants" class="hover:text-[#c5a059] text-[#c5a059]">المطاعم</a>
+                        <a href="#" class="hover:text-[#c5a059]">تذاكري</a>
+                    </div>
+                </div>
+                <a href="#" class="bg-[#c5a059] text-white px-6 py-2 rounded-full text-sm font-bold">
+                    دخول
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="relative h-[450px] overflow-hidden">
+        <img src="@Model.ImageUrl"
+             class="w-full h-full object-cover">
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end">
+            <div class="max-w-7xl mx-auto w-full px-6 pb-10">
+                <div class="flex flex-col md:flex-row items-center md:items-end gap-6">
+                    <div class="w-32 h-32 md:w-40 md:h-40 bg-white p-2 rounded-lg shadow-2xl">
+                        <img src="@Model.LogoUrl"
+                             class="w-full h-full object-contain">
+                    </div>
+                    <div class="text-white text-center md:text-right">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-3">@Model.Name</h1>
+                        <span class="bg-[#c5a059] px-4 py-1 rounded-full text-sm font-semibold">
+                            @Model.Type
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex flex-col lg:flex-row gap-8">
+
+            <!-- SIDEBAR -->
+            <div class="lg:w-1/3 space-y-8">
+
+                <section class="bg-white p-6 rounded-2xl shadow">
+                    <h2 class="text-xl font-bold mb-4 border-b pb-3">عن المطعم</h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        @Model.Description
+                    </p>
+                </section>
+
+                <section class="bg-white p-6 rounded-2xl shadow">
+                    <h2 class="text-xl font-bold mb-4 border-b pb-3">الحد الأدنى للحجز</h2>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-500">سعر الدخول</span>
+                        <span class="text-2xl font-bold text-[#c5a059]">
+                            100 ر.س
+                        </span>
+                    </div>
+                </section>
+
+                <section class="bg-white p-6 rounded-2xl shadow">
+                    <h2 class="text-xl font-bold mb-4">الموقع</h2>
+                    <div class="h-48 rounded-xl overflow-hidden">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3623.708383732955!2d46.574309!3d24.7368899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe6a9b7f454b6510f!2sBujairi%20Terrace!5e0!3m2!1sen!2ssa!4v1662991281447"
+                                class="w-full h-full border-0"
+                                loading="lazy">
+                        </iframe>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- BOOKING -->
+            <div class="lg:w-2/3">
+
+                <form asp-controller="Booking"
+                      asp-action="Create"
+                      method="post"
+                      class="bg-white p-8 rounded-2xl shadow-lg">
+
+                    <input type="hidden" name="restaurantId" value="@Model.Id" />
+                    <input type="hidden" name="SelectedTime" id="selectedTimeInput" />
+
+                    <h2 class="text-2xl font-bold mb-8">حجز طاولة</h2>
+
+                    <!-- DATE -->
+                    <div class="mb-6">
+                        <label class="block font-bold mb-2">اختر التاريخ</label>
+                        <select name="BookingDate"
+                                id="dateSelect"
+                                class="w-full p-4 bg-gray-50 border rounded-xl">
+                        </select>
+                    </div>
+
+                    <!-- GUESTS -->
+                    <div class="mb-6">
+                        <label class="block font-bold mb-2">عدد الضيوف</label>
+                        <div class="flex items-center bg-gray-50 border rounded-xl p-1">
+                            <button type="button"
+                                    onclick="changeQty(-1)"
+                                    class="w-12 h-12 text-xl font-bold">
+                                -
+                            </button>
+
+                            <input name="Guests"
+                                   id="guestInput"
+                                   type="number"
+                                   value="2"
+                                   min="2"
+                                   max="10"
+                                   readonly
+                                   class="flex-1 text-center font-bold text-lg bg-transparent">
+
+                            <button type="button"
+                                    onclick="changeQty(1)"
+                                    class="w-12 h-12 text-xl font-bold">
+                                +
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- TIME -->
+                    <div class="mb-8">
+                        <label class="block font-bold mb-4">اختر الوقت</label>
+                        <div id="timeSlotsContainer"
+                             class="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                        </div>
+                    </div>
+
+                    <!-- TOTAL -->
+                    <div class="flex justify-between items-center border-t pt-6">
+                        <div>
+                            <span class="block text-sm text-gray-500">الإجمالي</span>
+                            <span class="text-2xl font-bold">
+                                <span id="totalPrice">200</span> ر.س
+                            </span>
+                        </div>
+
+                        <button type="submit"
+                                class="px-10 py-4 bg-amber-600 text-white font-bold rounded-xl hover:bg-amber-700">
+                            احجز الآن
+                        </button>
+                    </div>
+
+                </form>
+
+                <!-- TERMS -->
+                <section class="bg-white p-6 rounded-2xl custom-shadow">
+                    <button class="flex justify-between items-center w-full font-bold text-xl" onclick="toggleTerms()">
+                        الشروط والأحكام
+                        <svg id="termsChevron" class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="termsContent" class="mt-4 text-sm text-gray-600 leading-relaxed space-y-3 hidden">
+                        <p>• يلتزم الضيف بالحجز والوصول في الوقت المحدد.</p>
+                        <p>• جميع المبالغ المدفوعة غير مستردة في حال عدم الحضور.</p>
+                        <p>• يمكن تعديل الحجز قبل 24 ساعة من الموعد المحدد.</p>
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
+            © 2024 مطل البجيري. جميع الحقوق محفوظة.
+        </div>
+    </footer>
+
+    <script src="~/js/angelina.js" asp-append-version="true"></script>
+
+</body>
+</html>
