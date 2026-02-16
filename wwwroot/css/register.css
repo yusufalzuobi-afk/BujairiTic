@@ -1,0 +1,49 @@
+﻿body {
+    font-family: 'NeoSansArabic', sans-serif;
+    background-color: #f4f6f8;
+}
+
+.bg-primary-bujairi {
+    background-color: #1a2b3c;
+}
+
+.bg-gold {
+    background-color: #c5a059;
+}
+
+.card-custom {
+    max-width: 1000px;
+}
+
+input, select {
+    border: 1px solid #cbd5e1;
+    padding: 14px;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+    input:focus {
+        outline: none;
+        border-color: #c5a059;
+        box-shadow: 0 0 0 3px rgba(197,160,89,0.15);
+    }
+
+label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.feedback {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    background: #16a34a;
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.4s;
+}

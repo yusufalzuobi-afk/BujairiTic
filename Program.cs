@@ -6,23 +6,46 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
+
 // ================= DB =================
 builder.Services.AddDbContext<AppDbContext>(opt =>
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    opt.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sql => sql.EnableRetryOnFailure()
+    ));
+
 
 // ================= Identity =================
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<AppDbContext>()
-    .AddDefaultTokenProviders();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddEntityFrameworkStores<AppDbContext>()
+.AddDefaultTokenProviders();
 
-// 👇 عدلنا مسار تسجيل الدخول
 builder.Services.ConfigureApplicationCookie(opt =>
 {
-    opt.LoginPath = "/Account/Login";   // بدون Areas
+    opt.LoginPath = "/Account/Login";
     opt.AccessDeniedPath = "/Account/AccessDenied";
+
+    // ⭐ مهم — يمنع Redirect تلقائي
+    opt.Events.OnRedirectToLogin = context =>
+    {
+        if (context.Request.Path.StartsWithSegments("/Booking"))
+        {
+            context.Response.StatusCode = 401;
+            return Task.CompletedTask;
+        }
+
+        context.Response.Redirect(context.RedirectUri);
+        return Task.CompletedTask;
+    };
 });
 
-// ================= Session (لليوزر الوهمي) =================
+
+// ================= Session =================
+builder.Services.AddDistributedMemoryCache();
+
 builder.Services.AddSession(opt =>
 {
     opt.IdleTimeout = TimeSpan.FromHours(6);
@@ -30,21 +53,33 @@ builder.Services.AddSession(opt =>
     opt.Cookie.IsEssential = true;
 });
 
+
+// ================= BUILD =================
 var app = builder.Build();
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseSession();          // لليوزر الوهمي
-app.UseAuthentication();   // Identity
+app.UseSession();
+app.UseAuthentication();
 app.UseAuthorization();
 
-// ================= Routing =================
+
+// ================= ROUTES =================
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+// ================= AUTO MIGRATION =================
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
 
 
 // ================= Seed Admin =================
@@ -53,11 +88,9 @@ using (var scope = app.Services.CreateScope())
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-    // إنشاء Role Admin
     if (!await roleManager.RoleExistsAsync("Admin"))
         await roleManager.CreateAsync(new IdentityRole("Admin"));
 
-    // إنشاء Admin User
     var adminEmail = "admin@site.com";
     var adminUser = await userManager.FindByEmailAsync(adminEmail);
 

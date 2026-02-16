@@ -1,0 +1,89 @@
+﻿<nav class="w-full bg-[#b8a893] shadow-sm border-b border-[#b8a893]">
+
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+
+        <!-- Menu Button -->
+        <button id="menuBtn" class="lg:hidden">
+            <img src="https://s3.ticketmx.com/bujairi/images/btn-menu.svg" class="h-6">
+        </button>
+
+        <!-- Logo -->
+        <a href="/">
+            <img src="https://s3.ticketmx.com/bujairi/images/bujairi-ar.svg"
+                 class="h-10 mx-auto">
+        </a>
+
+        <!-- English -->
+        <a href="/en" class="hidden lg:block text-sm text-white hover:text-gray-200">
+            English
+        </a>
+
+    </div>
+
+    <!-- Desktop Menu -->
+    <div class="hidden lg:flex justify-center gap-10 pb-3 text-sm font-medium text-white">
+
+        <a href="/" class="hover:text-gray-200">الرئيسية</a>
+        <a href="/#bookingSection" class="hover:text-gray-200">خيارات الحجز</a>
+        <a asp-controller="Restaurants" asp-action="Restaurants" class="hover:text-gray-200">المطاعم</a>
+        <a href="/Account/Login" class="hover:text-gray-200">تسجيل الدخول</a>
+
+    </div>
+
+</nav>
+
+
+<!-- Mobile Menu -->
+<div id="mobileMenu"
+     class="fixed top-0 right-0 w-full max-w-xs h-full bg-[#b8a893] shadow-2xl transform translate-x-full transition duration-300 z-[60] text-white">
+
+    <div class="p-4 border-b flex justify-between items-center border-white/30">
+
+        <span class="font-bold text-lg">القائمة</span>
+
+        <button id="closeMenu" class="text-xl">✕</button>
+
+    </div>
+
+    <div class="flex flex-col p-6 gap-5 text-sm font-medium">
+
+        <a href="/" class="hover:text-gray-200">الرئيسية</a>
+        <a asp-controller="Restaurants" asp-action="Restaurants" class="hover:text-gray-200">المطاعم</a>
+        <a href="/Account/Login" class="hover:text-gray-200">تسجيل الدخول</a>
+
+    </div>
+
+</div>
+
+
+<!-- Overlay -->
+<div id="overlay"
+     class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden z-50"></div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const menuBtn = document.getElementById("menuBtn");
+        const closeMenu = document.getElementById("closeMenu");
+        const mobileMenu = document.getElementById("mobileMenu");
+        const overlay = document.getElementById("overlay");
+
+        function openMenu() {
+            mobileMenu.classList.remove("translate-x-full");
+            overlay.classList.remove("hidden");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeMenuFunc() {
+            mobileMenu.classList.add("translate-x-full");
+            overlay.classList.add("hidden");
+            document.body.style.overflow = "auto";
+        }
+
+        if (menuBtn) menuBtn.addEventListener("click", openMenu);
+        if (closeMenu) closeMenu.addEventListener("click", closeMenuFunc);
+        if (overlay) overlay.addEventListener("click", closeMenuFunc);
+
+    });
+</script>

@@ -141,7 +141,8 @@
                         <a class="nav-link" href="https://www.bujairi.sa/ar">الرئيسية</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/ar">خيارات الحجز</a>
+                        <a class="nav-link" href="#bookingSection">خيارات الحجز</a>
+
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Restaurants" asp-action="Restaurants">
@@ -219,54 +220,57 @@
         </div>
 
         <!-- Upcoming Events -->
-        <section class="section upcoming">
+        <!-- Upcoming Events -->
+        <section class="section upcoming" id="bookingSection">
+
             <div class="container-wide">
+
                 <div class="main-title d-flex mb-3">
-                    <h2 class="title flex-grow-1">&#x645;&#x637;&#x627;&#x639;&#x645; &#x627;&#x644;&#x628;&#x62C;&#x64A;&#x631;&#x64A; &#x648;&#x628;&#x637;&#x627;&#x642;&#x629; &#x627;&#x644;&#x62F;&#x62E;&#x648;&#x644;</h2>
+                    <h2 class="title flex-grow-1">
+                        مطاعم البجيري وبطاقة الدخول
+                    </h2>
                 </div>
 
                 <div class="row grid-wrapper">
+
                     <div class="col-md-3 grid-sizer"></div>
 
-                    <div class="col-md-3 grid-item ">
-                        <a class="gtmProduct" data-event="productClick" data-product-name="Diriyah Access" data-product-id="3552" data-product-brand="na" data-product-price="0.00" data-product-category="na" data-product-city="&#x627;&#x644;&#x62F;&#x631;&#x639;&#x64A;&#x629; &#x60C; &#x627;&#x644;&#x631;&#x64A;&#x627;&#x636;" data-product-zone="na" data-product-position="1" data-product-venue="na" href="info.tecet.detals.html">
-                            <img class="event-img img-fluid w-100" src="https://s3.ticketmx.com/uploads/images/d7097b6161dba36db8645ced956467b691b53ae5.jpeg?w=750&amp;h=750&amp;mode=crop&amp;bgcolor=black&amp;format=jpg" alt="&#x62A;&#x635;&#x631;&#x64A;&#x62D; &#x62F;&#x62E;&#x648;&#x644; &#x627;&#x644;&#x62F;&#x631;&#x639;&#x64A;&#x629;">
+                    <!-- CARD 1 -->
+                    <div class="col-md-3 grid-item">
+
+                        <a class="gtmProduct"
+                           data-event="productClick"
+                           data-product-name="Diriyah Access"
+                           data-product-id="3552"
+                           href="@Url.Action("Tickets", "Booking")">
+
+                            <img class="event-img img-fluid w-100"
+                                 src="https://s3.ticketmx.com/uploads/images/d7097b6161dba36db8645ced956467b691b53ae5.jpeg?w=750&h=750&mode=crop&bgcolor=black&format=jpg"
+                                 alt="بطاقة تصريح دخول">
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- CARD 2 -->
+                    <div class="col-md-3 grid-item">
+                        <a class="gtmProduct"
+                           data-event="productClick"
+                           data-product-name="Diriyah Access 2"
+                           data-product-id="3553"
+                           href="@Url.Action("Restaurants", "Restaurants")">
+
+                            <img class="event-img img-fluid w-100"
+                                 src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5"
+                                 alt="بطاقة تصريح دخول ثانية">
                         </a>
                     </div>
 
-                    <script type="text/javascript">
-                        function productImpressions() {
-                            dataLayer.push({
-                                'event': 'view_item_list',
-                                'ecommerce': {
-                                    'currency': 'SAR',
-                                    'items': [
-
-                                            {
-                                                'item_id': '3552',
-                                                'item_name': 'Diriyah Access',
-                                                'item_brand': '',
-                                                'item_category': '',
-                                                'price': 0.00,
-                                                'currency': 'SAR',
-                                                'item_list': 'Event Listing',
-                                                'index': 1,
-                                                'booking_date': '',
-                                                'booking_time': '',
-                                                'booking_city': '&#x627;&#x644;&#x62F;&#x631;&#x639;&#x64A;&#x629; &#x60C; &#x627;&#x644;&#x631;&#x64A;&#x627;&#x636;',
-                                                'booking_location': '',
-                                                'booking_zone': '',
-                                                'booking_day_type': '',
-                                            }
-
-                                                ]
-                                }
-                            });
-                        }
-                        window.addEventListener("load", productImpressions);
-                    </script>
                 </div>
+
             </div>
+
         </section>
 
 
@@ -375,7 +379,35 @@
         })
     </script>
     <script>
+                document.addEventListener("DOMContentLoaded", function () {
 
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+                anchor.addEventListener('click', function (e) {
+
+                    const targetId = this.getAttribute('href');
+
+                    if (targetId.length > 1) {
+
+                        e.preventDefault();
+
+                        const target = document.querySelector(targetId);
+
+                        if (target) {
+
+                            window.scrollTo({
+                                top: target.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+
+                        }
+                    }
+
+                });
+
+            });
+
+        });
     </script>
 
 

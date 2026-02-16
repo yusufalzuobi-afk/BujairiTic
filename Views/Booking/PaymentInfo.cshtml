@@ -29,30 +29,48 @@
 
             <input type="hidden" name="id" value="@Model.Id" />
 
+            <!-- Card Number -->
             <div class="input-box">
                 <div class="label">رقم البطاقة</div>
-                <input class="input" name="CardNumber" id="cardNumber" type="text" maxlength="19" placeholder="0000 0000 0000 0000">
-                <div class="error" id="cardError">رقم البطاقة غير صالح</div>
+                <input class="input card-number-input"
+                       name="CardNumber"
+                       id="cardNumber"
+                       type="text"
+                       maxlength="19"
+                       placeholder="0000 0000 0000 0000">
             </div>
 
+            <!-- Row -->
             <div class="row">
+
                 <div class="input-box">
                     <div class="label">رمز الأمان (CVV)</div>
-                    <input class="input" name="CVV" id="cvv" type="password" maxlength="3">
-                    <div class="error" id="cvvError">CVV غير صحيح</div>
+                    <input class="input"
+                           name="CVV"
+                           id="cvv"
+                           type="password"
+                           maxlength="3">
                 </div>
 
                 <div class="input-box">
                     <div class="label">تاريخ الانتهاء</div>
-                    <input class="input" name="Expiry" id="expiry" type="text" maxlength="5" placeholder="MM/YY">
-                    <div class="error" id="expiryError">تاريخ غير صالح</div>
+                    <input class="input"
+                           name="Expiry"
+                           id="expiry"
+                           type="text"
+                           maxlength="5"
+                           placeholder="MM/YY">
                 </div>
+
             </div>
 
+            <!-- Name -->
             <div class="input-box">
                 <div class="label">اسم حامل البطاقة</div>
-                <input class="input" name="CardholderName" id="cardName" type="text">
-                <div class="error" id="nameError">الاسم يجب أن يكون أحرف فقط</div>
+                <input class="input"
+                       name="CardholderName"
+                       id="cardName"
+                       type="text">
             </div>
 
             <button type="submit" id="payBtn" disabled>تأكيد الدفع</button>
@@ -66,7 +84,117 @@
 
     </div>
 
-    <script src="~/js/payment.js" asp-append-version="true"></script>
+
+
+    <script>
+
+        // ===============================
+        // ELEMENTS
+        // ===============================
+
+        const cardInput = document.querySelector(".card-number-input");
+        const cvvInput = document.getElementById("cvv");
+        const expiryInput = document.getElementById("expiry");
+        const nameInput = document.getElementById("cardName");
+        const payBtn = document.getElementById("payBtn");
+
+
+        // ===============================
+        // FORMAT CARD NUMBER (اللي طلبته)
+        // ===============================
+
+        cardInput.addEventListener("input", function (e) {
+
+            let value = e.target.value.replace(/\D/g, "");
+
+            value = value.substring(0, 16);
+
+            value = value.replace(/(.{4})/g, "$1 ").trim();
+
+            e.target.value = value;
+
+            validate();
+
+        });
+
+
+        // ===============================
+        // FORMAT EXPIRY
+        // ===============================
+
+        expiryInput.addEventListener("input", function () {
+
+            let v = this.value.replace(/\D/g, "");
+
+            if (v.length === 1 && parseInt(v) > 1) {
+                v = "0" + v;
+            }
+
+            if (v.length >= 2) {
+
+                let month = parseInt(v.substring(0, 2));
+
+                if (month === 0) month = 1;
+                if (month > 12) month = 12;
+
+                let monthStr = month.toString().padStart(2, '0');
+
+                v = monthStr + v.substring(2);
+            }
+
+            if (v.length > 2) {
+                v = v.substring(0, 2) + "/" + v.substring(2, 4);
+            }
+
+            this.value = v;
+
+            validate();
+
+        });
+
+
+        // ===============================
+        // VALIDATE
+        // ===============================
+
+        function validate() {
+
+            let valid = true;
+
+            const card = cardInput.value.replace(/\s/g, "");
+
+            if (!/^\d{16}$/.test(card)) valid = false;
+
+            if (!/^\d{3}$/.test(cvvInput.value)) valid = false;
+
+            if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiryInput.value)) valid = false;
+
+            if (!/^[a-zA-Z\u0600-\u06FF\s]+$/.test(nameInput.value)) valid = false;
+
+            payBtn.disabled = !valid;
+
+            return valid;
+        }
+
+
+        cvvInput.addEventListener("input", validate);
+        nameInput.addEventListener("input", validate);
+
+
+        // ===============================
+        // SUBMIT CHECK
+        // ===============================
+
+        document.getElementById("paymentForm")
+            .addEventListener("submit", function (e) {
+
+                if (!validate()) {
+                    e.preventDefault();
+                }
+
+            });
+
+    </script>
 
 </body>
 </html>

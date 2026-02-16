@@ -1,0 +1,146 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>إنشاء حساب جديد</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://s3.ticketmx.com/fonts/NeoSansArabic/NeoSansArabic.css">
+
+    <link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
+</head>
+
+<body>
+
+    <header class="bg-primary-bujairi text-white py-10 text-center">
+        <h1 class="text-3xl font-bold">المعلومات الشخصية</h1>
+        <p class="text-gray-300 mt-2">يرجى ملء البيانات التالية لإتمام عملية التسجيل</p>
+    </header>
+
+
+    <main class="container mx-auto px-6 py-16">
+
+        <div class="card-custom mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden border">
+
+            <form asp-controller="Account"
+                  asp-action="Register"
+                  method="post"
+                  class="p-10 lg:p-16 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8"
+                  id="registrationForm">
+
+                <!-- Email -->
+                <div class="flex flex-col">
+                    <label>البريد الإلكتروني *</label>
+                    <input type="email" name="Email" required>
+                </div>
+
+                <div class="flex flex-col">
+                    <label>تأكيد البريد الإلكتروني *</label>
+                    <input type="email" required>
+                </div>
+
+                <!-- Password -->
+                <div class="flex flex-col">
+                    <label>كلمة المرور *</label>
+                    <input type="password" required>
+                </div>
+
+                <div class="flex flex-col">
+                    <label>تأكيد كلمة المرور *</label>
+                    <input type="password" required>
+                </div>
+
+                <!-- Name -->
+                <div class="flex flex-col md:col-span-2">
+                    <label>الاسم بالكامل *</label>
+
+                    <div class="grid grid-cols-2 gap-6">
+                        <input type="text" placeholder="الاسم الأول" required>
+                        <input type="text" placeholder="الاسم الأخير" required>
+                    </div>
+                </div>
+
+                <!-- Gender -->
+                <div class="flex flex-col">
+                    <label>الجنس *</label>
+                    <select>
+                        <option>ذكر</option>
+                        <option>أنثى</option>
+                    </select>
+                </div>
+
+                <!-- Mobile -->
+                <div class="flex flex-col">
+                    <label>رقم الجوال *</label>
+
+                    <div class="flex flex-row-reverse items-center border rounded-lg overflow-hidden">
+
+                        <span class="bg-gray-100 px-5 py-3.5 font-bold">+966</span>
+
+                        <input type="tel" class="border-none focus:ring-0 text-left" placeholder="5XXXXXXXX">
+                    </div>
+                </div>
+
+                <!-- DOB -->
+                <div class="flex flex-col">
+                    <label>تاريخ الميلاد *</label>
+                    <input type="date">
+                </div>
+
+                <!-- Nationality -->
+                <div class="flex flex-col">
+                    <label>الجنسية *</label>
+                    <select>
+                        <option>سعودي</option>
+                        <option>أخرى</option>
+                    </select>
+                </div>
+
+
+                <!-- Submit -->
+                <div class="md:col-span-2 mt-10">
+
+                    <button type="submit"
+                            class="w-full bg-gold text-white py-5 rounded-xl font-bold text-2xl hover:bg-yellow-600 transition shadow-xl">
+
+                        إنشاء الحساب الآن
+
+                    </button>
+
+                    <div class="text-center mt-6">
+
+                        <input type="checkbox" required>
+                        <span class="text-gray-500">
+                            بالضغط على إنشاء حساب، أنت توافق على الشروط والأحكام
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <!-- SUCCESS BOX -->
+    <div id="feedbackBox" class="feedback">
+        تم إرسال طلبك بنجاح!
+    </div>
+
+
+    <!-- JS -->
+    <script src="~/js/register.js" asp-append-version="true"></script>
+
+</body>
+</html>

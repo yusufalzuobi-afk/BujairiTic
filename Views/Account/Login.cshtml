@@ -13,13 +13,12 @@
     <link rel="stylesheet" href="https://s3.ticketmx.com/fonts/NeoSansArabic/NeoSansArabic.css">
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- 👇 نقلنا الستايل إلى ملف خارجي -->
+  
     <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
 </head>
 
 <body class="text-slate-800">
 
-    <!-- Navigation -->
     <nav class="bg-white navbar-shadow sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 flex items-center justify-between">
             <div class="hidden lg:flex gap-6 items-center text-sm">
@@ -41,7 +40,7 @@
         </div>
     </nav>
 
-    <!-- Page Header & Steps -->
+   
     <div class="bg-white border-b border-gray-100 py-8">
         <div class="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-8">
             <h1 class="text-3xl font-bold">تسجيل الدخول</h1>
@@ -69,7 +68,7 @@
         </div>
     </div>
 
-    <!-- Login Form Section -->
+ 
     <main class="py-16 px-4">
         <div class="max-w-md mx-auto">
             <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
@@ -99,8 +98,7 @@
         <input type="email"
                name="Email"
                required
-               class="form-input w-full p-4 rounded-2xl bg-gray-50"
-               placeholder="admin@site.com">
+               class="form-input w-full p-4 rounded-2xl bg-gray-50">
     </div>
 
     <div>
@@ -108,8 +106,7 @@
         <input type="password"
                name="Password"
                required
-               class="form-input w-full p-4 rounded-2xl bg-gray-50"
-               placeholder="••••••••">
+               class="form-input w-full p-4 rounded-2xl bg-gray-50">
     </div>
 
     <button type="submit"
@@ -121,11 +118,21 @@
 
 
                     <div class="mt-8 pt-8 border-t border-gray-100 text-center text-sm">
-                        <p class="text-gray-500">
-                            ليس لديك حساب؟
-                            <a href="log.up.html" class="text-amber-600 font-bold mr-2 hover:underline">تسجيل حساب جديد</a>
-                        </p>
-                    </div>
+    <p class="text-gray-500">
+
+        ليس لديك حساب؟
+
+        <a asp-controller="Account"
+           asp-action="Register"
+           class="text-amber-600 font-bold mr-2 hover:underline">
+
+            تسجيل حساب جديد
+
+        </a>
+
+    </p>
+</div>
+
                 </div>
             </div>
 

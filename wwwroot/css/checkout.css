@@ -15,6 +15,7 @@
     border-color: #a68b5a;
 }
 
+
 .steps-container {
     display: flex;
     justify-content: center;
@@ -43,10 +44,16 @@
             color: #cbd5e1;
         }
 
+
+/* =========================
+   PAYMENT CARD
+========================= */
+
 .payment-card {
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
     border: 2px solid transparent;
+    position: relative;
 }
 
     .payment-card:hover {
@@ -56,7 +63,63 @@
     .payment-card.selected {
         border-color: #a68b5a;
         background-color: #fffaf0;
+        transform: translateY(-2px);
     }
+
+
+    /* =========================
+   HIDE DEFAULT RADIO
+========================= */
+
+    .payment-card input[type="radio"] {
+        display: none;
+    }
+
+
+    /* =========================
+   CUSTOM RADIO
+========================= */
+
+    .payment-card .radio-custom {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #cbd5e1;
+        border-radius: 50%;
+        position: relative;
+        transition: 0.25s;
+        flex-shrink: 0;
+    }
+
+        /* inner circle */
+        .payment-card .radio-custom::after {
+            content: "";
+            width: 10px;
+            height: 10px;
+            background: #a68b5a;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: 0.25s;
+        }
+
+
+    /* selected state */
+
+    .payment-card.selected .radio-custom {
+        border-color: #a68b5a;
+        box-shadow: 0 0 0 4px rgba(166,139,90,0.15);
+    }
+
+        .payment-card.selected .radio-custom::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+
+/* =========================
+   TIMER
+========================= */
 
 .timer-badge {
     animation: pulse 2s infinite;

@@ -103,7 +103,7 @@ document.getElementById("bookingForm").addEventListener("submit", function (e) {
 
     if (!selectedTime) {
         e.preventDefault();
-        alert("يرجى اختيار وقت الحجز");
+       // alert("يرجى اختيار وقت الحجز");
         return;
     }
 

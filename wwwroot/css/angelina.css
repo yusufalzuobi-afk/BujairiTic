@@ -16,7 +16,7 @@
     color: white;
     border-color: #c5a059;
 }
-/* Custom scrollbar */
+
 ::-webkit-scrollbar {
     width: 8px;
 }

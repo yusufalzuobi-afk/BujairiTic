@@ -11,14 +11,13 @@ public class RestaurantsController : Controller
         _context = context;
     }
 
-    // صفحة عرض كل المطاعم
     public IActionResult Restaurants()
     {
         var restaurants = _context.Restaurants.ToList();
         return View(restaurants);
     }
 
-    // يفتح View مختلفة حسب المطعم
+   
     public IActionResult Details(int id)
     {
         var restaurant = _context.Restaurants
@@ -27,7 +26,7 @@ public class RestaurantsController : Controller
         if (restaurant == null)
             return NotFound();
 
-        // اختيار الصفحة حسب ID
+       
         switch (id)
         {
             case 1: return View("Brunch", restaurant);

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using BujairiTic.Models;
-using System.Threading.Tasks;
 
 public class AccountController : Controller
 {
@@ -16,6 +15,7 @@ public class AccountController : Controller
         _userManager = userManager;
     }
 
+
     [HttpGet]
     public IActionResult Login(string? returnUrl = null)
     {
@@ -23,12 +23,13 @@ public class AccountController : Controller
         return View();
     }
 
+  
     [HttpPost]
     public async Task<IActionResult> Login(string Email, string Password, string? returnUrl = null)
     {
         var user = await _userManager.FindByEmailAsync(Email);
 
-        // 👑 لو كان موجود في Identity → يعني Admin
+        // 👑 Admin فقط
         if (user != null)
         {
             var result = await _signInManager.PasswordSignInAsync(user, Password, false, false);
@@ -39,13 +40,12 @@ public class AccountController : Controller
             }
         }
 
-        // 👤 لو مش Admin → نعتبره مستخدم وهمي
-        HttpContext.Session.SetString("FAKE_USER", Email);
+        
 
         return RedirectToAction("Index", "Home");
     }
 
-
+  
     public async Task<IActionResult> Logout()
     {
         await _signInManager.SignOutAsync();

@@ -7,7 +7,7 @@
 @if (Model == null || !Model.Any())
 {
     <tr>
-        <td colspan="16">No Orders Found</td>
+        <td colspan="17">No Orders Found</td>
     </tr>
 }
 else
@@ -23,8 +23,10 @@ else
 
             <!-- Order ID -->
             <td>@order.Id</td>
-
+           
+            <td>@(item?.Title ?? "")</td>
             <!-- Booking -->
+     
             <td>
                 @(item?.BookingDate.ToString("yyyy-MM-dd") ?? "")
             </td>

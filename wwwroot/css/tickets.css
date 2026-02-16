@@ -1,0 +1,44 @@
+﻿body {
+    font-family: 'Neo Sans Arabic', sans-serif;
+    background: #fcfcfc;
+}
+
+.bg-bujairi {
+    background: #a68b5a;
+}
+
+.qty-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+
+.date-card {
+    padding: 10px 16px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    cursor: pointer;
+    background: white;
+}
+
+    .date-card.active {
+        background: #a68b5a;
+        color: white;
+    }
+
+
+.time-pill {
+    padding: 10px 20px;
+    border: 1px solid #eee;
+    border-radius: 30px;
+    cursor: pointer;
+    background: white;
+}
+
+    .time-pill.active {
+        background: black;
+        color: white;
+    }

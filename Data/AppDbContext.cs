@@ -37,9 +37,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
             .Property(r => r.MinimumCharge)
             .HasPrecision(18, 2);
 
-        // =========================
-        // SEEDER - الأربع مطاعم
-        // =========================
+       
         builder.Entity<Restaurant>().HasData(
 
            new Restaurant

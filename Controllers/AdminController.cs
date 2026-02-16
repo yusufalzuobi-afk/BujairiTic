@@ -15,26 +15,25 @@ public class AdminController : Controller
         _context = context;
     }
 
-    // ================= DASHBOARD =================
+   
     public IActionResult Dashboard()
     {
-        return View(); // الصفحة تعتمد AJAX
+        return View(); 
     }
 
-    // ================= AJAX: GET ORDERS =================
+  
     [HttpGet]
     public IActionResult GetOrders()
     {
         var orders = _context.Orders
                              .Include(o => o.Items)
-                             .Where(o => o.Status == OrderStatus.PendingAdmin)
+                             .Where(o => o.Status == OrderStatus.Draft)
                              .OrderByDescending(o => o.Id)
                              .ToList();
 
         return PartialView("_OrdersTable", orders);
     }
 
-    // ================= DELETE ORDER =================
     [HttpPost]
     public IActionResult Delete([FromBody] IdDto dto)
     {
@@ -53,7 +52,6 @@ public class AdminController : Controller
         return Json(new { success = true });
     }
 
-    // ================= CONFIRM TRANSACTION =================
     [HttpPost]
     public IActionResult ConfirmTransaction([FromBody] ConfirmDto dto)
     {
@@ -64,7 +62,6 @@ public class AdminController : Controller
 
         order.TransactionNo = dto.TransactionNo;
 
-        // 🔥 مهم — يخفي الكونفيرم
        
 
         _context.SaveChanges();

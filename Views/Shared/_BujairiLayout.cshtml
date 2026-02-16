@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="https://s3.ticketmx.com/bujairi/images/favicon.ico">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://s3.ticketmx.com/fonts/NeoSansArabic/NeoSansArabic.css">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://s3.ticketmx.com/css/ar/bootstrap-mod.min.css">
+
+    <!-- Vendor -->
+    <link rel="stylesheet" href="https://s3.ticketmx.com/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/lib/slick/slick.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/lib/slick/slick-theme.css">
+
+    <!-- Theme -->
+    <link rel="stylesheet" href="https://s3.ticketmx.com/css/ar/general.min.css">
+    <link rel="stylesheet" href="https://s3.ticketmx.com/css/ar/style.min.css">
+
+    <!-- Bujairi (مهم يكون آخر واحد) -->
+    <link rel="stylesheet" href="https://s3.ticketmx.com/bujairi/css/ar/bujairi-style.min.css?v=251126">
+
+    <title>@ViewData["Title"]</title>
+
+</head>
+
+<body>
+
+    @await Html.PartialAsync("_BujairiNavbar")
+
+    <div id="wrap">
+        @RenderBody()
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://s3.ticketmx.com/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://s3.ticketmx.com/lib/popper.js/dist/umd/popper.min.js"></script>
+    <script src="https://s3.ticketmx.com/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://s3.ticketmx.com/lib/slick/slick.js"></script>
+
+    <script src="https://s3.ticketmx.com/js/custom.js"></script>
+    <script src="https://s3.ticketmx.com/js/script.min.js?v=251126"></script>
+
+</body>
+</html>

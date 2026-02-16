@@ -15,7 +15,7 @@
     box-shadow: 0 2px 15px rgba(0,0,0,0.05);
 }
 
-/* Custom number input styling */
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;

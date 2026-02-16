@@ -1,0 +1,258 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+    ```
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>تصريح دخول الدرعية</title>
+
+    <link rel="stylesheet" href="https://s3.ticketmx.com/fonts/NeoSansArabic/NeoSansArabic.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: 'Neo Sans Arabic', sans-serif;
+            background-color: #fcfcfc;
+        }
+
+        .bg-bujairi {
+            background-color: #a68b5a;
+        }
+
+        .date-card.active {
+            background: #a68b5a;
+            color: white;
+        }
+
+        .time-pill.active {
+            background: #1e293b;
+            color: white;
+        }
+
+        .qty-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    ```
+
+</head>
+
+<body class="flex flex-col min-h-screen text-slate-800">
+
+    <header class="bg-white border-b py-6">
+        <div class="container mx-auto px-4">
+            <h1 class="text-2xl font-bold">تصريح دخول الدرعية</h1>
+        </div>
+    </header>
+
+    <section class="bg-white border-b">
+
+        ```
+        <div class="container mx-auto px-4 py-4">
+
+            <div class="flex gap-3 overflow-x-auto" id="dateGrid"></div>
+
+            <div class="mt-6 flex flex-wrap gap-3" id="timeGrid"></div>
+
+        </div>
+        ```
+
+    </section>
+
+    <main class="flex-grow container mx-auto px-4 py-12">
+
+        ```
+        <div class="max-w-3xl mx-auto">
+
+            <div class="bg-white rounded-3xl shadow border overflow-hidden">
+
+                <div class="bg-slate-900 text-white px-8 py-4">
+                    الرجاء الاختيار
+                </div>
+
+                <div class="p-8">
+
+                    <div class="flex justify-between items-center">
+
+                        <div>
+                            <h3 class="font-bold text-lg">دخول الدرعية</h3>
+                            <p class="text-sm text-gray-400">تصريح دخول يومي</p>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+
+                            <button type="button" onclick="updateQty(-1)" class="qty-btn">-</button>
+
+                            <span id="ticketQty" class="font-bold">1</span>
+
+                            <button type="button" onclick="updateQty(1)" class="qty-btn">+</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <form id="bookingForm"
+                  asp-controller="Booking"
+                  asp-action="Create"
+                  method="post">
+
+                <input type="hidden" name="restaurantId" value="0" />
+
+                <input type="hidden" name="BookingDate" id="bookingDateInput" />
+                <input type="hidden" name="SelectedTime" id="selectedTimeInput" />
+                <input type="hidden" name="Guests" id="qtyInput" value="1" />
+
+                <button type="button"
+                        id="checkoutBtn"
+                        class="w-full mt-8 py-5 bg-bujairi text-white font-bold rounded-2xl">
+
+                    اشتر الآن
+
+                </button>
+
+            </form>
+
+        </div>
+        ```
+
+    </main>
+
+    <script>
+
+        let currentQty = 1;
+        let selectedDate = null;
+        let selectedTime = null;
+
+
+        // =====================
+        // DATE
+        // =====================
+
+        const dateGrid = document.getElementById("dateGrid");
+        const today = new Date();
+
+        for (let i = 0; i < 10; i++) {
+
+            let d = new Date();
+            d.setDate(today.getDate() + i);
+
+            let text = d.toLocaleDateString("ar-SA", {
+                weekday: 'short',
+                day: 'numeric',
+                month: 'short'
+            });
+
+            let div = document.createElement("div");
+            div.className = "date-card border rounded-xl p-3 cursor-pointer";
+
+            div.innerText = text;
+
+            div.onclick = () => {
+
+                document.querySelectorAll(".date-card").forEach(x => x.classList.remove("active"));
+
+                div.classList.add("active");
+
+                selectedDate = d.toISOString();
+
+                document.getElementById("bookingDateInput").value = selectedDate;
+            };
+
+            if (i === 0) div.click();
+
+            dateGrid.appendChild(div);
+        }
+
+
+        // =====================
+        // TIME
+        // =====================
+
+        const timeGrid = document.getElementById("timeGrid");
+
+        for (let h = 9; h <= 23; h++) {
+
+            let txt = (h % 12 || 12) + ":00 " + (h >= 12 ? "م" : "ص");
+
+            let btn = document.createElement("div");
+            btn.className = "time-pill border px-4 py-2 rounded-full cursor-pointer";
+            btn.innerText = txt;
+
+            btn.onclick = () => {
+
+                document.querySelectorAll(".time-pill").forEach(x => x.classList.remove("active"));
+
+                btn.classList.add("active");
+
+                selectedTime = txt;
+
+                document.getElementById("selectedTimeInput").value = txt;
+            };
+
+            timeGrid.appendChild(btn);
+        }
+
+
+        // =====================
+        // QTY
+        // =====================
+
+        function updateQty(delta) {
+
+            let newQty = currentQty + delta;
+
+            if (newQty < 1) newQty = 1;
+            if (newQty > 8) newQty = 8;
+
+            currentQty = newQty;
+
+            document.getElementById("ticketQty").innerText = currentQty;
+            document.getElementById("qtyInput").value = currentQty;
+        }
+
+
+        // =====================
+        // SUBMIT
+        // =====================
+
+        document.getElementById("checkoutBtn").addEventListener("click", function () {
+
+            if (!selectedDate) {
+                showToast("يرجى اختيار التاريخ أولاً", "error");
+                return;
+            }
+
+            if (!selectedTime) {
+                showToast("يرجى اختيار الوقت أولاً", "error");
+                return;
+            }
+
+            document.getElementById("bookingForm").submit();
+        });
+
+    </script>
+
+    <script src="~/js/toast.js" asp-append-version="true"></script>
+
+</body>
+</html>

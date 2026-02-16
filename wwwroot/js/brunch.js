@@ -96,7 +96,7 @@
     document.getElementById('bookingForm').addEventListener('submit', function (e) {
         if (!selectedTimeBtn) {
             e.preventDefault();
-            alert("يرجى اختيار الوقت أولاً");
+            //alert("يرجى اختيار الوقت أولاً");
         }
     });
 

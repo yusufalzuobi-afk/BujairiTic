@@ -15,14 +15,14 @@ namespace BujairiTic.Models
         [MaxLength(1000)]
         public string Description { get; set; }
 
-        // الحد الأدنى للحجز
+ 
         public decimal MinimumCharge { get; set; }
 
-        // صورة الغلاف
+        
         [MaxLength(500)]
         public string ImageUrl { get; set; }
 
-        // لوجو المطعم
+        
         [MaxLength(500)]
         public string LogoUrl { get; set; }
     }
