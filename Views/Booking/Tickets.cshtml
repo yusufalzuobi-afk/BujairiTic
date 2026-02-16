@@ -1,15 +1,12 @@
-﻿@using Microsoft.AspNetCore.Http
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
 
 <head>
 
-    ```
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -48,7 +45,6 @@
             justify-content: center;
         }
     </style>
-    ```
 
 </head>
 
@@ -62,7 +58,6 @@
 
     <section class="bg-white border-b">
 
-        ```
         <div class="container mx-auto px-4 py-4">
 
             <div class="flex gap-3 overflow-x-auto" id="dateGrid"></div>
@@ -70,13 +65,11 @@
             <div class="mt-6 flex flex-wrap gap-3" id="timeGrid"></div>
 
         </div>
-        ```
 
     </section>
 
     <main class="flex-grow container mx-auto px-4 py-12">
 
-        ```
         <div class="max-w-3xl mx-auto">
 
             <div class="bg-white rounded-3xl shadow border overflow-hidden">
@@ -85,24 +78,42 @@
                     الرجاء الاختيار
                 </div>
 
-                <div class="p-8">
+                <div class="p-8 space-y-6">
 
                     <div class="flex justify-between items-center">
 
                         <div>
                             <h3 class="font-bold text-lg">دخول الدرعية</h3>
                             <p class="text-sm text-gray-400">تصريح دخول يومي</p>
+
+                            <div class="mt-2 text-sm text-gray-500">
+                                السعر
+                                <span class="font-bold text-amber-700">
+                                    50.00 ريال
+                                </span>
+                            </div>
                         </div>
 
                         <div class="flex items-center gap-4">
 
                             <button type="button" onclick="updateQty(-1)" class="qty-btn">-</button>
 
-                            <span id="ticketQty" class="font-bold">1</span>
+                            <span id="ticketQty" class="font-bold text-lg">1</span>
 
                             <button type="button" onclick="updateQty(1)" class="qty-btn">+</button>
 
                         </div>
+
+                    </div>
+
+                    <hr />
+
+                    <!-- TOTAL -->
+                    <div class="flex justify-between items-center text-lg font-bold">
+
+                        <span>الإجمالي</span>
+
+                        <span id="totalPrice">50 ريال</span>
 
                     </div>
 
@@ -133,11 +144,12 @@
             </form>
 
         </div>
-        ```
 
     </main>
 
     <script>
+
+        const ticketPrice = 50;
 
         let currentQty = 1;
         let selectedDate = null;
@@ -214,7 +226,7 @@
 
 
         // =====================
-        // QTY
+        // UPDATE QTY
         // =====================
 
         function updateQty(delta) {
@@ -228,7 +240,24 @@
 
             document.getElementById("ticketQty").innerText = currentQty;
             document.getElementById("qtyInput").value = currentQty;
+
+            updateTotal();
         }
+
+
+        // =====================
+        // TOTAL
+        // =====================
+
+        function updateTotal() {
+
+            const total = currentQty * ticketPrice;
+
+            document.getElementById("totalPrice").innerText =
+                total.toFixed(2) + " ريال";
+        }
+
+        updateTotal();
 
 
         // =====================

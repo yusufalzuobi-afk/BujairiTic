@@ -50,15 +50,16 @@ public class BookingController : Controller
         }
         else
         {
-           
+            decimal price = 50;
+
             item = new OrderItem
             {
                 Title = "تصريح دخول الدرعية",
                 BookingDate = BookingDate,
                 Guests = Guests,
                 SelectedTime = SelectedTime,
-                UnitPrice = 0,
-                LineTotal = 0
+                UnitPrice = price,
+                LineTotal = price * Guests
             };
         }
 
